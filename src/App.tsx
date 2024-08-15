@@ -4,18 +4,24 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import VendorsListPage from "./vendors/VendorsListPage";
 import Home from "./IndexPage";
-import CreateVendorPage from "./vendors/CreateVendorPage";
+import NavMenu from "./NavMenu";
+import Header from "./Header";
+import NotFound from "./NotFound";
 
 function App() {
 	return (
 		<BrowserRouter>
 			<>
-				<main>
-					<section>
+				<Header />
+				<main className="d-flex">
+					<div className=" bg-secondary-subtle min-vh-100">
+						<NavMenu />
+					</div>
+					<section className="p-3 w-100">
 						<Routes>
 							<Route path="/" element={<Home />} />
 							<Route path="/vendors" element={<VendorsListPage />} />
-							<Route path="/vendors" element={<CreateVendorPage />} />
+							<Route path="*" element={<NotFound />} />
 						</Routes>
 					</section>
 				</main>

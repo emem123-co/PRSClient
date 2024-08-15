@@ -1,83 +1,119 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import Header from "../Header"
-import NavMenu from "../NavMenu"
 import { Link } from "react-router-dom";
 
 function VendorsListPage() {
-	
 	return (
 		<>
 			<div>
-				<Header />
-			</div>
-			<div> 
-			<div className="min-vh-100 d-flex">
-				<NavMenu />
-			</div>
 				<section className="container-fluid bg-white">
-					<p className="d-flex p-4 justify-content-end">
-						<Link className="btn btn-outline-primary" to="./CreateVendorPage">
-							Add Vendor
+					<p className="d-flex justify-content-between align-items-center m-0 px-1">
+						<h4 className="m-0 fw-light fs-5">VENDORS</h4>
+						<Link className="btn btn-primary" to="./CreateVendorPage">
+							ADD VENDOR
 						</Link>
 					</p>
 
-					<div className="">
-						<div className="d-flex gap-3 card-group">
-							<div className="card shadow-lg">
-								<div className="card-body">
-									<h4 className="card-title">Vendor Name</h4>
-									<address className="card-text px-3">
-										1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
-									</address>
-								</div>
-							</div>
-
-							<div className="card shadow-lg">
-								<div className="card-body">
-									<h4 className="card-title">Vendor Name</h4>
-									<address className="card-text px-3">
-										1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
-									</address>
-								</div>
-							</div>
-
-							<div className="card shadow-lg">
-								<div className="card-body">
-									<h4 className="card-title">Vendor Name</h4>
-									<address className="card-text px-3">
-										1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
-									</address>
-								</div>
-							</div>
-
-							<div className="card shadow-lg">
-								<div className="card-body">
-									<h4 className="card-title">Vendor Name</h4>
-									<address className="card-text px-3">
-										1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
-									</address>
-								</div>
-							</div>
-
-							<div className="card shadow-lg">
-								<div className="card-body">
-									<h4 className="card-title">Vendor Name</h4>
-									<address className="card-text px-3">
-										1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
-									</address>
-								</div>
-							</div>
-
-							<div className="card shadow-lg">
-								<div className="card-body">
-									<h4 className="card-title">Vendor Name</h4>
-									<address className="card-text px-3">
-										1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
-									</address>
+					<div className="d-flex flex-wrap gap-4 pt-3">
+						<div className="card p-3 shadow-lg">
+							<h4 className="card-title fs-5 ">Vendor Name</h4>
+							<div className="card-body p-0">
+								<address className="card-text">
+									1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
+								</address>
+								<div className="d-flex justify-content-end">
+									<Link to="" className="btn btn p-1 fs-6">
+										edit
+									</Link>
 								</div>
 							</div>
 						</div>
+
+						<div className="card p-3 shadow-lg">
+							<h4 className="card-title fs-5 ">Vendor Name</h4>
+							<div className="card-body p-0">
+								<address className="card-text">
+									1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
+								</address>
+								<div className="d-flex justify-content-end">
+									<Link to="" className="btn btn p-1 fs-6">
+										edit
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						<div className="card p-3 shadow-lg">
+							<h4 className="card-title fs-5 ">Vendor Name</h4>
+							<div className="card-body p-0">
+								<address className="card-text">
+									1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
+								</address>
+								<div className="d-flex justify-content-end">
+									<Link to="" className="btn btn p-1 fs-6">
+										edit
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						<div className="card p-3 shadow-lg">
+							<h4 className="card-title fs-5 ">Vendor Name</h4>
+							<div className="card-body p-0">
+								<address className="card-text">
+									1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
+								</address>
+								<div className="d-flex justify-content-end">
+									<Link to="" className="btn btn p-1 fs-6">
+										edit
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						<div className="card p-3 shadow-lg">
+							<h4 className="card-title fs-5 ">Vendor Name</h4>
+							<div className="card-body p-0">
+								<address className="card-text">
+									1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
+								</address>
+								<div className="d-flex justify-content-end">
+									<Link to="" className="btn btn p-1 fs-6">
+										edit
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						<div className="card p-3 shadow-lg">
+							<h4 className="card-title fs-5 ">Vendor Name</h4>
+							<div className="card-body p-0">
+								<address className="card-text">
+									1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
+								</address>
+								<div className="d-flex justify-content-end">
+									<Link to="" className="btn btn p-1 fs-6">
+										edit
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						<div className="card p-3 shadow-lg">
+							<h4 className="card-title fs-5 ">Vendor Name</h4>
+							<div className="card-body p-0">
+								<address className="card-text">
+									1016 Center Street Ashland, OH 44804 8002347834 support@vendorname.com
+								</address>
+								<div className="d-flex justify-content-end">
+									<Link to="" className="btn btn p-1 fs-6">
+										edit
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						
 					</div>
 				</section>
 			</div>
