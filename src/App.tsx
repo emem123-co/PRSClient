@@ -7,6 +7,8 @@ import Home from "./IndexPage";
 import NavMenu from "./NavMenu";
 import Header from "./Header";
 import NotFound from "./NotFound";
+import CreateVendorPage from "./vendors/CreateVendorPage";
+import EditVendorPage from "./vendors/EditVendorPage";
 
 function App() {
 	return (
@@ -21,6 +23,8 @@ function App() {
 						<Routes>
 							<Route path="/" element={<Home />} />
 							<Route path="/vendors" element={<VendorsListPage />} />
+							<Route path="/vendors/createvendorpage" element={<CreateVendorPage />} />
+							<Route path="/vendors/editvendorpage" element={<EditVendorPage />} />
 							<Route path="*" element={<NotFound />} />
 						</Routes>
 					</section>
