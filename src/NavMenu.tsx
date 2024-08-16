@@ -7,7 +7,7 @@ function NavMenu() {
 			<div className="d-flex flex-column bg-secondary-subtle">
 				<main className="pt-2 bg-secondary-subtle">
 					<nav className="">
-						<ul className="nav flex-column">
+						<ul className="nav flex-column nav-pills px-4">
 							<li className="nav-item">
 								<Link className="nav-link" to={""}>
 									Purchases

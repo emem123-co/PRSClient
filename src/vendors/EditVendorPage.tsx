@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import { useState, useEffect } from "react";
 import VendorForm from "./VendorForm";
 import { Link } from "react-router-dom";
 

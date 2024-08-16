@@ -1,0 +1,18 @@
+POST http://localhost:5000/api/vendors
+Content-Type: application/json
+
+{
+
+    "id": 0,
+    "code": "AA",
+    "name": "AA",
+    "address": "AA",
+    "city": "AA",
+    "state": "AA",
+    "zip": "AA",
+    "phone": "AA",
+    "email": "AA"
+  
+
+
+}
