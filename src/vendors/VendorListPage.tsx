@@ -9,12 +9,13 @@ function VendorListPage() {
 			<div>
 				<section className="container-fluid bg-white">
 					<p className="d-flex justify-content-between align-items-center m-0 px-1">
-						<h4 className="m-0 fw-light fs-5">VENDORS</h4>
+						<h4 className="m-0 fw-normal fs-5">Vendors</h4>
 						<Link className="btn btn-primary fw-light fs-6" to="./create">
-							ADD VENDOR
+							+ Vendor
 						</Link>
 					</p>
-					<div className="pt-4">
+					<hr />
+					<div className="pt-2">
 						<VendorList />
 					</div>
 				</section>

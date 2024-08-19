@@ -1,40 +1,39 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, NavLink } from "react-router-dom";
-
 function NavMenu() {
 	return (
 		<>
-			<div className="d-flex flex-column bg-secondary-subtle">
-				<main className="pt-2 bg-secondary-subtle">
-					<nav className="">
+			<div className="d-flex bg-secondary-subtle min-vh-100 navcustom">
+				<main className="pt-3 bg-secondary-subtle">
+					<nav>
 						<ul className="nav flex-column nav-pills px-4">
 							<li className="nav-item">
-								<Link className="nav-link" to={""}>
+								<NavLink className="nav-link" to="">
 									Purchases
-								</Link>
+								</NavLink>
 							</li>
 
 							<li className="nav-item">
-								<Link className="nav-link" to={""}>
+								<NavLink className="nav-link" to="">
 									Requests
-								</Link>
+								</NavLink>
 							</li>
 
 							<li className="nav-item">
-								<Link className="nav-link" to={""}>
+								<NavLink className="nav-link" to="">
 									Products
-								</Link>
+								</NavLink>
 							</li>
 
 							<li className="nav-item">
-								<NavLink className="nav-link" to={"/vendors"}>
+								<NavLink className="nav-link" to="/vendors">
 									Vendors
 								</NavLink>
 							</li>
 							<li className="nav-item">
-								<Link className="nav-link" to={""}>
+								<NavLink className="nav-link" to="/users">
 									Users
-								</Link>
+								</NavLink>
 							</li>
 						</ul>
 					</nav>

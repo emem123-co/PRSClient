@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Vendor } from "./Vendor";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -15,7 +15,7 @@ function VendorForm() {
 
 	const [busy, setBusy] = useState(false);
 	const [error, setError] = useState(undefined);
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	async function save(vendor: Vendor) {
 		try {
@@ -31,24 +31,25 @@ function VendorForm() {
 
 	return (
 		<>
-		
-			<div className=" d-flex justify-content-center">
-				<div className="card shadow-lg w-100 p-3 border-1 fw-light fs-6">
-					{busy && <p>Saving...</p>}
-					{error && <div className="alert alert-danger">{error}</div>}
-					<form className="d-flex flex-column" onSubmit={handleSubmit(save)}>
-						<label className="pb-1 form-label" htmlFor="name">
+			<div className="d-flex fw-normal fs-6">
+				{busy && <p>Saving...</p>}
+				{error && <div className="alert alert-danger">{error}</div>}
+				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)}>
+					<div className="row-1 d-flex flex-column w-100">
+						<label className="form-label" htmlFor="name">
 							Vendor Name
 						</label>
 						<input
-							className={`border form-control ${errors.name ? "is-invalid" : ""}`}
+							className={`form-control ${errors.name ? "is-invalid" : ""}`}
 							{...register("name", { required: "Vendor name is required." })}
 							type="text"
 							id="name"
 						/>
 						{errors.name && <div className="invalid-feedback"> {errors.name?.message}</div>}
+					</div>
 
-						<label className="pt-3 pb-1 form-label" htmlFor="address">
+					<div className="row-2 d-flex flex-column w-100">
+						<label className="pt-3 form-label" htmlFor="address">
 							Vendor Address
 						</label>
 						<input
@@ -58,64 +59,80 @@ function VendorForm() {
 							id="address"
 						/>
 						{errors.address && <div className="invalid-feedback">{errors.address?.message}</div>}
+					</div>
 
-						<label className="pt-3 pb-1 form-label" htmlFor="city">
-							Vendor City
-						</label>
-						<input
-							className={`border form-control ${errors.city ? "is-invalid" : ""}`}
-							{...register("city", { required: "Vendor city is required." })}
-							type="text"
-							id="city"
-						/>
-						{errors.city && <div className="invalid-feedback">{errors.city?.message}</div>}
+					<div className="pt-3 gap-3 row-3 d-flex flex-row w-100">
+						<div className="d-flex flex-column w-100">
+							<label className="form-label" htmlFor="city">
+								City
+							</label>
+							<input
+								className={`border form-control ${errors.city ? "is-invalid" : ""}`}
+								{...register("city", { required: "Vendor city is required." })}
+								type="text"
+								id="city"
+							/>
+							{errors.city && <div className="invalid-feedback">{errors.city?.message}</div>}
+						</div>
 
-						<label
-							className="pt-3 pb-1 form-label"
-							htmlFor="state"
-							{...register("state", { required: "Vendor state is required." })}
-						>
-							State
-						</label>
-						<input
-							className={`border form-control ${errors.state ? "is-invalid" : ""}`}
-							{...register("state", { required: "Vendor state is required." })}
-							type="text"
-							id="state"
-						/>
-						{errors.state && <div className="invalid-feedback">{errors.state?.message}</div>}
+						<div className="d-flex flex-column w-100">
+							<label
+								className="form-label"
+								htmlFor="state"
+								{...register("state", { required: "Vendor state is required." })}
+							>
+								State
+							</label>
+							<input
+								className={`border form-control ${errors.state ? "is-invalid" : ""}`}
+								{...register("state", { required: "Vendor state is required." })}
+								type="text"
+								id="state"
+							/>
+							{errors.state && <div className="invalid-feedback">{errors.state?.message}</div>}
+						</div>
 
-						<label className="pt-3 pb-1 form-label" htmlFor="zip">
-							Zip
-						</label>
-						<input
-							className={`border form-control ${errors.zip ? "is-invalid" : ""}`}
-							{...register("zip", { required: "Vendor zip code is required." })}
-							type="text"
-							id="zip"
-						/>
-						{errors.zip && <div className="invalid-feedback">{errors.zip?.message}</div>}
+						<div className="d-flex flex-column w-100">
+							<label className="form-label" htmlFor="zip">
+								Zip
+							</label>
+							<input
+								className={`border form-control ${errors.zip ? "is-invalid" : ""}`}
+								{...register("zip", { required: "Vendor zip code is required." })}
+								type="text"
+								id="zip"
+							/>
+							{errors.zip && <div className="invalid-feedback">{errors.zip?.message}</div>}
+						</div>
+					</div>
 
-						<label className="pt-3 pb-1 form-label" htmlFor="phone">
-							Phone
-						</label>
-						<input className="border form-control" {...register("phone")} type="text" id="phone" />
+					<div className="pt-3 gap-3 row-4 d-flex flex-row w-100">
+						<div className="d-flex flex-column w-100">
+							<label className="form-label" htmlFor="phone">
+								Phone
+							</label>
+							<input className="border form-control" {...register("phone")} type="text" id="phone" />
+						</div>
 
-						<label className="pt-3 pb-1 form-label" htmlFor="email">
-							Email
-						</label>
-						<input className="border form-control" {...register("email")} type="text" id="email" />
+						<div className="d-flex flex-column w-100">
+							<label className="form-label" htmlFor="email">
+								Email
+							</label>
+							<input className="border form-control" {...register("email")} type="text" id="email" />
+						</div>
+					</div>
 
-						<div className="d-flex justify-content-end gap-3 pt-3">
-							<button  type="submit" className="btn btn-primary fw-light fs-6">
-								Save
-							</button>
+					<div className="pt-4 gap-3 row-5 d-flex flex-row w-100  justify-content-end ">
+						<div className="d-flex gap-3 pt-3">
 							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={"/vendors"}>
 								Cancel
 							</Link>
+							<button type="submit" className="btn btn-primary fw-light fs-6">
+								Save
+							</button>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</>
 	);

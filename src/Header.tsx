@@ -5,13 +5,13 @@ function Header() {
 	return (
 		<>
 			<div className="">
-				<header className="d-flex bg-secondary-subtle p-2 px-3 justify-content-between align-items-center border-bottom border-20 border-dark-subtle">
+				<header className="d-flex bg-secondary-subtle p-3 justify-content-between align-items-center border-bottom border-20 border-dark-subtle">
 					<div className="d-flex align-items-center">
 						<div className="">
 							<svg
 								id="logo-35"
-								width={60}
-								height={60}
+								width={40}
+								height={40}
 								viewBox="0 0 50 50"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ function Header() {
 								/>
 							</svg>
 						</div>
-						<p className="m-0 fw-light fs-6 px-2">PURCHASE REQUEST SYSTEM</p>
+						<p className="m-0 fw-semibold fs-6 px-2">Purchase Request System</p>
 					</div>
 					<div className="px-2">
 						<Link to="" className="btn btn-outline-primary align-content-center">

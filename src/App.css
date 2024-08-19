@@ -1,3 +1,16 @@
 .card {
 	width: 15rem;
 }
+
+.navcustom {
+	width: 15rem;
+}
+
+/* .subheadercontainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0;
+	padding-inline: 2;
+	height: 3rem;
+} */

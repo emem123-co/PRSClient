@@ -19,7 +19,7 @@ function VendorList() {
 	}, []);
 
 	return (
-		<section className="d-flex flex-wrap gap-4">
+		<section className=" container-fluid bg-white d-flex flex-wrap gap-4">
 			{busy && (
 				<div className="d-flex justify-content-center align-items-center w-100 vh-100">
 					<div className="spinner-border" role="status">
