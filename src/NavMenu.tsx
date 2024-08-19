@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 function NavMenu() {
 	return (
 		<>
