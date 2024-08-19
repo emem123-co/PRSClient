@@ -47,7 +47,12 @@ export const vendorAPI = {
 			},
 			body: JSON.stringify(vendor)
 		}).then(checkStatus).then(parseJSON);
-			}
-		
+			},
+
+		listByProduct(vendorId: number): Promise<Vendor[]> {
+			let currentUrl = `${BASE_URL}/products/${vendorId}/vendors?_expand=products `;
+			return fetch(currentUrl).then(checkStatus).then(parseJSON);
+			},
+	
 	 };
 

@@ -22,7 +22,7 @@ function VendorForm() {
 		try {
 			setBusy(true);
 			let newVendor = await vendorAPI.post(vendor);
-			toast.success("Vendor successfully added!")
+			toast.success("Success!")
 			// navigate("/vendors");
 		} catch (error: any) {
 			setError(error.message);

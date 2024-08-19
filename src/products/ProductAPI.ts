@@ -1,5 +1,6 @@
 import { BASE_URL, checkStatus, parseJSON } from "../utility/fetchUtilities";
 import { Product } from "./Product";
+import { vendorAPI } from "../vendors/VendorAPI";
 
 let url = `${BASE_URL}/products`;
 
@@ -11,10 +12,6 @@ export const productAPI = {
 	find(id: number) {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
-	
-	// findVendor(id: number) {
-	// 	return fetch(`${url}/${vendorId}`).then(checkStatus).then(parseJSON)
-	// },
 
 	delete(id: number) {
 		return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
@@ -55,4 +52,13 @@ export const productAPI = {
 			.then(checkStatus)
 			.then(parseJSON);
 	},
+
+	async findVendorbyProdID(id: number): Promise<Product> {
+		let product = await productAPI.find(id);
+
+		if(product.id) {
+			product.vendors = await vendorAPI.listByProduct(product?.id)
+		}
+		return Promise.resolve(product);
+	}
 };

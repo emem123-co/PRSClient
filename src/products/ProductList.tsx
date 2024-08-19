@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Product } from "./Product";
 import { productAPI } from "./ProductAPI";
 import { Link } from "react-router-dom";
-import VendorList from "../vendors/VendorList";
 
 function ProductList() {
 	const [products, setProducts] = useState<Product[]>([]);
@@ -35,15 +34,10 @@ function ProductList() {
 				<div className="card p-4" key={product.id}>
 					<strong>{product.name}</strong>
 					<small>{product.price}</small> / <small>{product.unit}</small>
-			
-					
-					
-						{/* <small key={product.vendorId}>{Vendor.name}</small>  */}
-						{/* <small className="Vendor" key={product.vendorId}>{Vendor.phone}</small>  */}
-						
-						
-
-
+					<small>{product.vendors?.name}</small>
+					<small>{product.vendors?.phone}</small>
+		
+										
 					<span>
 						<Link to={`/products/edit/${product.id}`}>edit</Link> |{" "}
 						<Link to={`/products/delete/${product.id}`}>delete</Link>

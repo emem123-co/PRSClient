@@ -7,8 +7,8 @@ export class Product {
 	price = "";
 	unit = "";
 	photoPath = "";
-	vendorId = "";
-	vendor = Vendor;
+	vendorId: number |undefined;
+	vendors: Vendor[] | undefined;
 	
 
 	get isNew(): boolean {
@@ -18,12 +18,12 @@ export class Product {
 	constructor(initializer?: any) {
 		if (!initializer) return;
 		if (initializer.id) this.id = initializer.id;
-		if (initializer.code) this.partNbr = initializer.partNbr;
+		if (initializer.partNbr) this.partNbr = initializer.partNbr;
 		if (initializer.name) this.name = initializer.name;
-		if (initializer.address) this.price = initializer.price;
-		if (initializer.city) this.unit = initializer.unit;
-		if (initializer.state) this.photoPath = initializer.photoPath;
-		if (initializer.zip) this.vendorId = initializer.vendorId;
-		if (initializer.phone) this.vendor = initializer.Vendor;
+		if (initializer.price) this.price = initializer.price;
+		if (initializer.unit) this.unit = initializer.unit;
+		if (initializer.photoPath) this.photoPath = initializer.photoPath;
+		if (initializer.vendorId) this.vendorId = initializer.vendorId;
+		if (initializer.vendors) this.vendors = initializer.Vendor;
 	}
 }

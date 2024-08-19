@@ -5,6 +5,7 @@ import { User } from "./User";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { userAPI } from "./UserAPI";
+import toast from "react-hot-toast";
 
 function UserForm() {
 	const {
@@ -21,6 +22,7 @@ function UserForm() {
 		try {
 			setBusy(true);
 			let newUser = await userAPI.post(user);
+			toast.success("Success!")
 			// navigate("/users");
 		} catch (error: any) {
 			setError(error.message);
