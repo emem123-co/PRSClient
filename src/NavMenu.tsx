@@ -8,19 +8,19 @@ function NavMenu() {
 					<nav>
 						<ul className="nav flex-column nav-pills px-4">
 							<li className="nav-item">
-								<NavLink className="nav-link" to="">
+								<NavLink className="nav-link" to="/purchases">
 									Purchases
 								</NavLink>
 							</li>
 
 							<li className="nav-item">
-								<NavLink className="nav-link" to="">
+								<NavLink className="nav-link" to="/requests">
 									Requests
 								</NavLink>
 							</li>
 
 							<li className="nav-item">
-								<NavLink className="nav-link" to="">
+								<NavLink className="nav-link" to="/products">
 									Products
 								</NavLink>
 							</li>

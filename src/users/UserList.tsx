@@ -29,23 +29,24 @@ function UserList() {
 			)}
 
 			{users.map((user) => (
-				<div className="card p-4" key={user.id}>
-					<strong className="d-flex flex-column">
-						<div className="d-flex flex-column w-50">
-							{user.isAdmin && <span className="text-info">ADMIN</span>}
-							{user.isReviewer && <span className=" text-bg-info text-white">REVIEWER</span>}
-						</div>
-						<br />
-						{user.lastName}, {user.firstName}
-					</strong>
-					<small>{user.userName}</small>
-					<small>
-						{user.email} | {user.phone}
-					</small>
+				<div className="d-flex gap-4 p-4 align-items-center" style={{ width: "25rem" }} key={user.id}>
+					<div style={{width: "6rem", height: "6rem"}}className="px-5 d-flex rounded-circle bg-secondary text-white fs-4 align-items-center justify-content-center">
+						<span>{Array(user.firstName[0])}</span><span>{Array(user.lastName[0])}</span>
+					</div>
+					<div>
 					{/* {currentUser === isAdmin && } */}
-					<span>
+					<p className="m-0">{user.firstName} {user.lastName}</p>
+					<div className="d-flex gap-2">
+						{user.isAdmin && <small className=" text-bg-dark text-white rounded-2 p-1 px-2">ADMIN</small>}
+						{user.isReviewer && <small className=" text-bg-secondary text-white rounded-2 p-1 px-2">REVIEWER</small>}
+					</div>
+					<small className="pt-2">
+						{user.phone}
+					</small>
+					{/* <div className=" dropdown-menu-end">
 						<Link to={`/users/edit/${user.id}`}>edit</Link> | <Link to={`/users/delete/${user.id}`}>delete</Link>
-					</span>
+					</div> */}
+					</div>
 				</div>
 			))}
 		</section>

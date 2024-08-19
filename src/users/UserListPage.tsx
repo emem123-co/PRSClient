@@ -15,6 +15,7 @@ function UserListPage() {
 						</Link>
 					</p>
 					<hr />
+					
 					<div className="pt-2">
 						<UserList />
 					</div>
