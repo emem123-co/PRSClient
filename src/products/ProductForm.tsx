@@ -1,11 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
 import { Link } from "react-router-dom";
-import { Vendor } from "./Vendor";
+import { Vendor } from "./Product";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { vendorAPI } from "./VendorAPI";
-import toast from "react-hot-toast";
+import { vendorAPI } from "./ProductAPI";
 
 function VendorForm() {
 	const {
@@ -22,7 +21,6 @@ function VendorForm() {
 		try {
 			setBusy(true);
 			let newVendor = await vendorAPI.post(vendor);
-			toast.success("Vendor successfully added!")
 			// navigate("/vendors");
 		} catch (error: any) {
 			setError(error.message);

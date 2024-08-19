@@ -5,7 +5,6 @@ import { User } from "./User";
 import { userAPI } from "./UserAPI";
 import { Link } from "react-router-dom";
 
-
 function UserList() {
 	const [users, setUsers] = useState<User[]>([]);
 	const [busy, setBusy] = useState(false);
@@ -21,8 +20,6 @@ function UserList() {
 		loadUsers();
 	}, []);
 
-	
-
 	return (
 		<section className=" container-fluid bg-white d-flex flex-wrap gap-4 align-content-center">
 			{busy && (
@@ -34,39 +31,54 @@ function UserList() {
 			)}
 
 			{users.map((user) => (
-				<div
-					className="d-flex p-3 gap-4 align-items-center"
-					style={{ width: "20rem" }}
-					key={user.id}
-				>
+				<div className="d-flex p-3 gap-4 align-items-center" style={{ width: "25rem" }} key={user.id}>
 					<div
 						style={{ width: "2rem", height: "6rem" }}
-						className="px-5 d-flex rounded-circle bg-secondary text-white fs-4 align-items-center justify-content-center"
+						className="px-5 d-flex rounded-circle bg-secondary text-white fs-4 align-items-center justify-content-center "
 					>
 						<span>{Array(user.firstName[0])}</span>
 						<span>{Array(user.lastName[0])}</span>
 					</div>
+
 					<div>
+						<section className="d-flex gap-2">
+							<p className="m-0 fs-5 fw-semibold" style={{ width: 180 }}>
+								{user.firstName} {user.lastName}
+							</p>
 
-						{/* <div className="d-flex"> */}
-						<p className="m-0 fs-5 fw-semibold">
-							{user.firstName} {user.lastName}
-						</p>
+							<div className="dropdown dropdown-menu-end">
+								<button
+									id="dLabel"
+									type="button"
+									data-toggle="dropdown"
+									aria-haspopup="true"
+									aria-expanded="false"
+									className="border-0 bg-white rounded-2 p-0 justify-content-end"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="16"
+										height="16"
+										fill="black"
+										className="bi bi-three-dots-vertical"
+										viewBox="0 0 16 16"
+									>
+										{" "}
+										<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+									</svg>
+								</button>
 
-						{/* <div className="dropdown">
-							<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"className="">
-								insert icon
-							</button>
-								
-							<div className="dropdown-menu" aria-labelledby="dLabel">
-								<Link className="dropdown-item" to="./users/edit">edit</Link>
-								<button className="dropdown-item" type="button">delete</button>
+								<div className="dropdown-menu" aria-labelledby="dLabel">
+									<Link className="dropdown-item" to="./users/edit">
+										edit
+									</Link>
+									<button className="dropdown-item" type="button">
+										delete
+									</button>
+								</div>
 							</div>
-						</div> */}
-						{/* </div> */}
-
-
-						<div className="d-flex gap-2 py-1">
+						</section>
+						<div className="d-flex gap-2 py-2">
 							{user.isAdmin && <small className="border border-secondary text-dark rounded-2 p-1 px-2">Admin</small>}
 							{user.isReviewer && <small className=" bg-body-secondary text-black rounded-2 p-1 px-2">Reviewer</small>}
 							{!user.isReviewer && !user.isAdmin && (
@@ -75,10 +87,23 @@ function UserList() {
 								</small>
 							)}
 						</div>
-						<small className="">{user.phone}</small>
-						<div className="d-flex gap-2">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							className="bi bi-telephone-fill pb-1"
+							viewBox="0 0 16 16"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"
+							/>
+						</svg>
+						<span className="ps-1 m-0">{user.phone}</span>
+						{/* <div className="d-flex gap-2">
 						<Link to={`/users/edit/${user.id}`}>edit</Link> | <Link to={`/users/delete/${user.id}`}>delete</Link>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			))}

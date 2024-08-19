@@ -12,6 +12,7 @@ import EditVendorPage from "./vendors/EditVendorPage";
 import UserListPage from "./users/UserListPage";
 import CreateUserPage from "./users/CreateUserPage";
 import EditUserPage from "./users/EditUserPage";
+import {Toaster} from "react-hot-toast"
 
 function App() {
 	return (
