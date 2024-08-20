@@ -35,9 +35,6 @@ function VendorForm() {
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
-				{busy && <p>Saving...</p>}
-				{error && <div className="alert alert-danger">{error}</div>}
-
 				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)}>
 					<div className="d-flex row-1 gap-3 w-100">
 						<div className="d-flex flex-column w-100">
@@ -134,6 +131,10 @@ function VendorForm() {
 						</div>
 					</div>
 				</form>
+			</div>
+			<div className="d-flex w-75 justify-content-end pt-3">
+				{busy && <p>Saving...</p>}
+				{error && <div className="alert alert-danger">{error}</div>}
 			</div>
 		</>
 	);
