@@ -1,41 +1,61 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Product } from "./Product";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { productAPI } from "./ProductAPI";
 import { Vendor } from "../vendors/Vendor";
+import { vendorAPI } from "../vendors/VendorAPI";
 
-function VendorForm() {
+function ProductForm() {
+	let { productId: productIdAsString } = useParams<{ productId: string }>();
+	let { vendorId: vendorIdAsString } = useParams<{ vendorId: string }>();
+	let productId = Number(productIdAsString);
+	let vendorId = Number(vendorIdAsString);
+	const [vendors, setVendors] = useState<Vendor[]>([]);
+
+	const navigate = useNavigate();
+	// const [busy, setBusy] = useState(false);
+	// const [error, setError] = useState(undefined);
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<Product>();
+	} = useForm<Product>({
+		defaultValues: async () => {
+			let vendorsData = await vendorAPI.list();
+			setVendors(vendorsData);
 
-	const [busy, setBusy] = useState(false);
-	const [error, setError] = useState(undefined);
-	// const navigate = useNavigate();
+			if (!productId) {
+				let newProduct = new Product({ vendorId: vendorId });
+				return Promise.resolve(newProduct);
+			} else {
+				return await productAPI.find(vendorId);
+			}
+		},
+	});
 
-	async function save(product: Product) {
+	const save: SubmitHandler<Product> = async (product) => {
 		try {
-			setBusy(true);
-			let newVendor = await productAPI.post(product);
+			if (product.isNew) {
+				await productAPI.post(product);
+			} else {
+				await productAPI.put(product);
+			}
+			navigate("/products");
 			toast.success("Success!");
-			// navigate("/products");
 		} catch (error: any) {
-			setError(error.message);
-		} finally {
-			setBusy(false);
+			toast.error(error.message);
 		}
-	}
+	};
 
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
-				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)}>
+				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)} noValidate>
 					<div className="d-flex row-1 gap-3 w-100">
 						<div className="d-flex flex-column w-100">
 							<label className="form-label" htmlFor="name">
@@ -87,33 +107,33 @@ function VendorForm() {
 									className={`border form-control ${errors.unit ? "is-invalid" : ""}`}
 									{...register("unit", { required: "Unit is required." })}
 									type="text"
-									id="state"
+									id="unit"
 								/>
 								{errors.unit && <div className="invalid-feedback">{errors.unit?.message}</div>}
 							</div>
 
 							<div className="w-50 align-content-end ps-3">
-								<label className="align-content-center" htmlFor="vendors"></label>
+								<label className="align-content-center" htmlFor="vendorId"></label>
 								<select
-									id="vendors"
-									className={`form-select dropdown ${errors.vendors ? "is-invalid" : ""}`}
-									{...register("vendors", { required: "Please choose vendor(s)." })}
+									id="vendorId"
+									className={`form-select dropdown ${errors.vendorId ? "is-invalid" : ""}`}
+									{...register("vendorId", { required: "Please choose vendor(s)." })}
 								>
-									<option>Select vendor...</option>
-									{[].map((vendor: Vendor) => (
-										<option className=" dropdown-item" key={vendor.id}>
+									<option value="">Select vendor...</option>
+									{vendors.map((vendor) => (
+										<option className=" dropdown-item" key={vendor.id} value={vendor.id}>
 											<div>{vendor.name}</div>
 										</option>
 									))}
 								</select>
-								{errors.vendors && <div className="Please choose vendor(s).">{errors.vendors?.message}</div>}
+								{errors.vendorId && <div className="Please choose vendor(s).">{errors?.vendorId?.message}</div>}
 							</div>
 						</div>
 					</div>
 
 					<div className="pt-3 gap-3 row-3 d-flex flex-row w-100">
 						<div className="d-flex flex-column w-100">
-							<label className="form-label" htmlFor="photo">
+							<label className="form-label" htmlFor="photoPath">
 								Add Photo
 							</label>
 							<input className="border form-control" {...register("photoPath")} type="text" id="photoPath" />
@@ -132,12 +152,8 @@ function VendorForm() {
 					</div>
 				</form>
 			</div>
-			<div className="d-flex w-75 justify-content-end pt-3">
-				{busy && <p>Saving...</p>}
-				{error && <div className="alert alert-danger">{error}</div>}
-			</div>
 		</>
 	);
 }
 
-export default VendorForm;
+export default ProductForm;

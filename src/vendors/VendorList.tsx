@@ -39,7 +39,8 @@ function VendorList() {
 					<small>{vendor.phone}</small>
 					<small>{vendor.email}</small>
 					<span>
-					<Link to={`/vendors/edit/${vendor.id}`}>edit</Link> | <Link  to={`/vendors/delete/${vendor.id}`}>delete</Link>
+						<Link to={`/vendors/edit/${vendor.id}`}>edit</Link> |{" "}
+						<Link to={`/vendors/delete/${vendor.id}`}>delete</Link>
 					</span>
 				</div>
 			))}

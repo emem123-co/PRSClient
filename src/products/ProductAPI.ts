@@ -4,12 +4,17 @@ import { vendorAPI } from "../vendors/VendorAPI";
 
 let url = `${BASE_URL}/products`;
 
+// function replacer(key: string, value: any) {
+// 	if(key==="vendor") return undefined;
+// 	return value;
+// }
+
 export const productAPI = {
-	list() {
+	list(): Promise<Product[]> {
 		return fetch(`${url}?_sort=name&_order=asc`).then(checkStatus).then(parseJSON);
 	},
 
-	find(id: number) {
+	find(id: number): Promise<Product[]> {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
 
@@ -52,13 +57,4 @@ export const productAPI = {
 			.then(checkStatus)
 			.then(parseJSON);
 	},
-
-	async findVendorbyProdID(id: number): Promise<Product> {
-		let product = await productAPI.find(id);
-
-		if(product.id) {
-			product.vendors = await vendorAPI.listByProduct(product?.id)
-		}
-		return Promise.resolve(product);
-	}
 };
