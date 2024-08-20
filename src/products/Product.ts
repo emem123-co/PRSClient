@@ -7,9 +7,8 @@ export class Product {
 	price = "";
 	unit = "";
 	photoPath = "";
-	vendorId: number |undefined;
-	vendors: Vendor[] | undefined;
-	
+	vendorId: number | undefined;
+	vendors: Vendor | undefined;
 
 	get isNew(): boolean {
 		return this.id === undefined;

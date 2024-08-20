@@ -17,8 +17,6 @@ function ProductForm() {
 	const [vendors, setVendors] = useState<Vendor[]>([]);
 
 	const navigate = useNavigate();
-	// const [busy, setBusy] = useState(false);
-	// const [error, setError] = useState(undefined);
 
 	const {
 		register,
@@ -42,11 +40,11 @@ function ProductForm() {
 		try {
 			if (product.isNew) {
 				await productAPI.post(product);
+				navigate("/products");
+				toast.success("Success!");
 			} else {
 				await productAPI.put(product);
 			}
-			navigate("/products");
-			toast.success("Success!");
 		} catch (error: any) {
 			toast.error(error.message);
 		}
@@ -55,7 +53,7 @@ function ProductForm() {
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
-				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)} noValidate>
+				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)}>
 					<div className="d-flex row-1 gap-3 w-100">
 						<div className="d-flex flex-column w-100">
 							<label className="form-label" htmlFor="name">
@@ -67,7 +65,9 @@ function ProductForm() {
 								type="text"
 								id="name"
 							/>
-							{errors.name && <div className="invalid-feedback"> {errors.name?.message}</div>}
+							<div className="invalid-feedback">
+								{errors.name?.message}
+							</div>
 						</div>
 
 						<div className="d-flex flex-column w-100">
@@ -75,12 +75,14 @@ function ProductForm() {
 								Part Number
 							</label>
 							<input
-								className={`border form-control ${errors.partNbr ? "is-invalid" : ""}`}
+								className={`form-control ${errors.partNbr ? "is-invalid" : ""}`}
 								{...register("partNbr", { required: "Part number is required." })}
 								type="text"
 								id="partNbr"
 							/>
-							{errors.partNbr && <div className="invalid-feedback">{errors.partNbr?.message}</div>}
+							<div className="invalid-feedback">
+								{errors.partNbr?.message}
+							</div>
 						</div>
 					</div>
 
@@ -90,12 +92,14 @@ function ProductForm() {
 								Price
 							</label>
 							<input
-								className={`border form-control ${errors.price ? "is-invalid" : ""}`}
+								className={`form-control ${errors.price ? "is-invalid" : ""}`}
 								{...register("price", { required: "Price is required." })}
 								type="text"
 								id="price"
 							/>
-							{errors.price && <div className="invalid-feedback">{errors.price?.message}</div>}
+							<div className="invalid-feedback">
+								{errors.price?.message}
+							</div>
 						</div>
 
 						<div className="d-flex">
@@ -104,12 +108,14 @@ function ProductForm() {
 									Unit
 								</label>
 								<input
-									className={`border form-control ${errors.unit ? "is-invalid" : ""}`}
+									className={`form-control ${errors.unit ? "is-invalid" : ""}`}
 									{...register("unit", { required: "Unit is required." })}
 									type="text"
 									id="unit"
 								/>
-								{errors.unit && <div className="invalid-feedback">{errors.unit?.message}</div>}
+								<div className="invalid-feedback">
+									{errors.unit?.message}
+								</div>
 							</div>
 
 							<div className="w-50 align-content-end ps-3">
@@ -122,11 +128,13 @@ function ProductForm() {
 									<option value="">Select vendor...</option>
 									{vendors.map((vendor) => (
 										<option className=" dropdown-item" key={vendor.id} value={vendor.id}>
-											<div>{vendor.name}</div>
+											<>{vendor.name}</>
 										</option>
 									))}
 								</select>
-								{errors.vendorId && <div className="Please choose vendor(s).">{errors?.vendorId?.message}</div>}
+								<div className="Please choose vendor(s).">
+									{errors?.vendorId?.message}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -136,7 +144,7 @@ function ProductForm() {
 							<label className="form-label" htmlFor="photoPath">
 								Add Photo
 							</label>
-							<input className="border form-control" {...register("photoPath")} type="text" id="photoPath" />
+							<input className="form-control" {...register("photoPath")} type="text" id="photoPath" />
 						</div>
 					</div>
 

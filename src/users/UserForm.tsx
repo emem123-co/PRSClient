@@ -20,7 +20,7 @@ function UserForm() {
 		await userAPI.post(user);
 
 		toast.success("Success!");
-		navigate("/vendors");
+		navigate("/users");
 	}
 
 	return (
@@ -60,12 +60,14 @@ function UserForm() {
 							Email Address
 						</label>
 						<input
-							className={`border form-control ${errors.email ? "is-invalid" : ""}`}
+							className={`form-control ${errors.email ? "is-invalid" : ""}`}
 							{...register("email", { required: "User email is required." })}
 							type="text"
 							id="email"
 						/>
-						{errors.email && <div className="invalid-feedback">{errors.email?.message}</div>}
+						<div className="invalid-feedback">
+							{errors.email?.message}
+						</div>
 					</div>
 
 					<div className="pt-3 gap-3 row-3 d-flex flex-row w-100">
@@ -74,12 +76,14 @@ function UserForm() {
 								Username
 							</label>
 							<input
-								className={`border form-control ${errors.userName ? "is-invalid" : ""}`}
+								className={`form-control ${errors.userName ? "is-invalid" : ""}`}
 								{...register("userName", { required: "Username is required." })}
 								type="text"
 								id="city"
 							/>
-							{errors.userName && <div className="invalid-feedback">{errors.userName?.message}</div>}
+							<div className="invalid-feedback">
+								{errors.userName?.message}
+							</div>
 						</div>
 
 						<div className="d-flex flex-column w-100">
@@ -87,47 +91,53 @@ function UserForm() {
 								Password
 							</label>
 							<input
-								className={`border form-control ${errors.password ? "is-invalid" : ""}`}
+								className={`form-control ${errors.password ? "is-invalid" : ""}`}
 								{...register("password", { required: "User password is required." })}
 								type="password"
 								id="password"
 							/>
-							{errors.password && <div className="invalid-feedback">{errors.password?.message}</div>}
+							<div className="invalid-feedback">
+								{errors.password?.message}
+							</div>
 						</div>
 
 						<div className="d-flex flex-column w-100">
 							<label className="form-label" htmlFor="phone">
 								Phone
 							</label>
-							<input className="border form-control" {...register("phone")} type="text" id="phone" />
+							<input className="form-control" {...register("phone")} type="text" id="phone" />
 						</div>
 					</div>
 
 					<div className="pt-3 gap-3 row-4 d-flex flex-column">
 						<div className="d-flex align-items-center">
 							<label className="form-check-label pe-3" htmlFor="isReviewer">
-								I want to authorize this user to review others' requests.
+								This user can review others' requests.
 							</label>
 							<input
-								className={`form-check-input border form-control h-100 ${errors.isReviewer ? "is-invalid" : ""}`}
+								className={`form-check-input form-control h-100 ${errors.isReviewer ? "is-invalid" : ""}`}
 								{...register("isReviewer")}
 								type="checkbox"
 								id="isReviewer"
 							/>
-							{errors.isReviewer && <div className="invalid-feedback">{errors.isReviewer?.message}</div>}
+							<div className="invalid-feedback">
+								{errors.isReviewer?.message}
+								</div>
 						</div>
 
 						<div className="d-flex align-items-center">
 							<label className="form-check-label pe-3" htmlFor="isAdmin">
-								I want this user to be a Purchase Request System admin.
+								This user is a system admin.
 							</label>
 							<input
-								className={`border form-control form-check-input h-100 ${errors.isAdmin ? "is-invalid" : ""}`}
+								className={`form-control form-check-input h-100 ${errors.isAdmin ? "is-invalid" : ""}`}
 								{...register("isAdmin")}
 								type="checkbox"
 								id="isAdmin"
 							/>
-							{errors.isAdmin && <div className="invalid-feedback">{errors.isAdmin?.message}</div>}
+							<div className="invalid-feedback">
+								{errors.isAdmin?.message}
+							</div>
 						</div>
 					</div>
 

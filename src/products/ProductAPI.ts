@@ -1,13 +1,13 @@
 import { BASE_URL, checkStatus, parseJSON } from "../utility/fetchUtilities";
 import { Product } from "./Product";
-import { vendorAPI } from "../vendors/VendorAPI";
+
 
 let url = `${BASE_URL}/products`;
 
-// function replacer(key: string, value: any) {
-// 	if(key==="vendor") return undefined;
-// 	return value;
-// }
+function replacer(key: string, value: any) {
+	if (key === "vendor") return undefined;
+	return value;
+}
 
 export const productAPI = {
 	list(): Promise<Product[]> {
@@ -25,7 +25,7 @@ export const productAPI = {
 	post(product: Product) {
 		return fetch(`${url}`, {
 			method: "POST",
-			body: JSON.stringify(product),
+			body: JSON.stringify(product, replacer),
 			headers: {
 				"Content-Type": "application/json",
 			},
