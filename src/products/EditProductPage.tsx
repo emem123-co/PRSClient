@@ -1,26 +1,26 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import VendorForm from "./ProductForm";
+import ProductForm from "./ProductForm";
 import { Link } from "react-router-dom";
 
-function EditVendorPage() {
+function EditProductPage() {
 	return (
 		<>
 			<div>
 				<section className="container-fluid bg-white">
 					<p className="d-flex justify-content-between align-items-center m-0 px-1">
-						<h4 className="m-0 fw-normal fs-5">Edit Vendor</h4>
-						<Link className="btn btn-outline-danger fw-normal fs-6" to="./vendors">
+						<h4 className="m-0 fw-normal fs-5">Edit Product</h4>
+						<Link className="btn btn-outline-danger fw-normal fs-6" to="./products">
 							Cancel
 						</Link>
 					</p>
 					<hr />
 					<div className="pt-2">
-						<VendorForm />
+						<ProductForm />
 					</div>
 				</section>
 			</div>
 		</>
 	);
 }
-export default EditVendorPage;
+export default EditProductPage;

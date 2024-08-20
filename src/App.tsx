@@ -13,6 +13,9 @@ import UserListPage from "./users/UserListPage";
 import CreateUserPage from "./users/CreateUserPage";
 import EditUserPage from "./users/EditUserPage";
 import {Toaster} from "react-hot-toast"
+import ProductListPage from "./products/ProductListPage";
+import CreateProductPage from "./products/CreateProductPage";
+import EditProductPage from "./products/EditProductPage";
 
 function App() {
 	return (
@@ -35,6 +38,13 @@ function App() {
 							<Route path="/users/create" element={<CreateUserPage />} />
 							<Route path="/users/edit/:id" element={<EditUserPage />} />
 							{/* <Route path="/users/delete/:id" element={</>} /> */}
+
+							<Route path="/products" element={<ProductListPage />} />
+							<Route path="/products/create" element={<CreateProductPage />} />
+							<Route path="/products/edit/:id" element={<EditProductPage />} />
+							{/* <Route path="/products/delete/:id" element={</>} /> */}
+
+
 						</Routes>
 					</section>
 				</main>

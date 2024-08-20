@@ -1,20 +1,20 @@
 // import { useState, useEffect } from "react";
 // import { Vendor } from "./Vendor";
-// import { vendorAPI } from "./VendorAPI";
+// import { productAPI } from "./VendorAPI";
 
 // function DeleteVendor(id: number) {
-// 	const [vendors, setVendors] = useState<Vendor[]>([]);
+// 	const [products, setProducts] = useState<Vendor[]>([]);
 // 	const [busy, setBusy] = useState(false);
 
-//    async function deleteVendors() {
+//    async function deleteProducts() {
 // 		setBusy(true);
       
-// 		setVendors(id);
+// 		setProducts(id);
 // 		setBusy(false);
 // 	}
 
 // 	useEffect(() => {
-// 		deleteVendors();
+// 		deleteProducts();
 // 	}, []);
 
 // };

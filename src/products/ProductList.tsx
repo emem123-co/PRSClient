@@ -33,7 +33,7 @@ function ProductList() {
 			{products.map((product) => (
 				<div className="card p-4" key={product.id}>
 					<strong>{product.name}</strong>
-					<small>{product.price}</small> / <small>{product.unit}</small>
+					<span>{product.price} / {product.unit}</span>
 					<small>{product.vendors?.name}</small>
 					<small>{product.vendors?.phone}</small>
 		

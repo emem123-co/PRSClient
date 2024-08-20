@@ -24,6 +24,6 @@ export class Product {
 		if (initializer.unit) this.unit = initializer.unit;
 		if (initializer.photoPath) this.photoPath = initializer.photoPath;
 		if (initializer.vendorId) this.vendorId = initializer.vendorId;
-		if (initializer.vendors) this.vendors = initializer.Vendor;
+		if (initializer.products) this.vendors = initializer.Product;
 	}
 }
