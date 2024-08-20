@@ -2,11 +2,21 @@ import { useEffect, useState } from "react";
 import { Product } from "./Product";
 import { productAPI } from "./ProductAPI";
 import { Link } from "react-router-dom";
+import { vendorAPI } from "../vendors/VendorAPI";
+import { Vendor } from "../vendors/Vendor";
 
 function ProductList() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [busy, setBusy] = useState(false);
+	const [vendors, setVendors] = useState<Vendor[]>([])
 
+		
+	
+	async function getVendorName(vendorId: number) {
+			let vendorsData = await vendorAPI.list();
+			setVendors(vendorsData);
+				return vendorsData;
+		};
 	
 
 	async function loadProducts() {
@@ -19,6 +29,8 @@ function ProductList() {
 	useEffect(() => {
 		loadProducts();
 	}, []);
+
+	
 
 	return (
 		<section className=" container-fluid bg-white d-flex flex-wrap gap-4">
@@ -34,9 +46,17 @@ function ProductList() {
 				<div className="card p-4" key={product.id}>
 					<strong>{product.name}</strong>
 					<span>{product.price} / {product.unit}</span>
-					<small>{product.vendors?.name}</small>
-					<small>{product.vendors?.phone}</small>
-		
+					<small>{getVendorName()} 
+					}</small>
+			
+
+					{/* <small>{vendorId.name}</small>
+					<small>{vendorId.phone}</small> */}
+
+					{/* {for (const product of products) {
+						vendorAPI.find({vendorId})
+						
+					}} */}
 										
 					<span>
 						<Link to={`/products/edit/${product.id}`}>edit</Link> |{" "}
@@ -44,6 +64,8 @@ function ProductList() {
 					</span>
 				</div>
 			))}
+
+			
 		</section>
 	);
 }
