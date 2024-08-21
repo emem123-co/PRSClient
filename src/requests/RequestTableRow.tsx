@@ -2,19 +2,19 @@ import { Link } from "react-router-dom";
 import { Request } from "./Request";
 import { SyntheticEvent } from "react";
 
-interface MovieTableRowProps {
+interface RequestTableRowProps {
   request: Request;
   onRemove: (request: Request) => void;
 }
 
-function MovieTableRow({ request, onRemove }: MovieTableRowProps) {
+function RequestTableRow({ request, onRemove }: RequestTableRowProps) {
   return (
     <tr>
       <td>
-        <Link to={`/movies/detail/${request.id}`}>{request.description}</Link>
+         {request.id}
       </td>
       <td>
-        {request.id} {request.description}
+        <Link to={`/requests/detail/${request.id}`}>{request.description}</Link>
       </td>
       <td>{request.status}</td>
       <td>{request.total && "$"}{request.total}</td>
@@ -23,7 +23,7 @@ function MovieTableRow({ request, onRemove }: MovieTableRowProps) {
       </td>
       <td>
         <div className="d-flex gap-2">
-          <Link className="small" to={`/movies/edit/${request.id}`}>
+          <Link className="small" to={`/requests/edit/${request.id}`}>
             edit
           </Link>
           |
@@ -42,4 +42,4 @@ function MovieTableRow({ request, onRemove }: MovieTableRowProps) {
   );
 }
 
-export default MovieTableRow;
+export default RequestTableRow;

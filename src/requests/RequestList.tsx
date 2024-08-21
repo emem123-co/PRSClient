@@ -22,18 +22,16 @@ function RequestList() {
 	}
 }
 
-	
-
 	useEffect(() => {
 		loadRequests();
 	}, []);
 
 	async function remove(request: Request) {
-		if (confirm("Are you sure you want to delete this Movie?")) {
+		if (confirm("Are you sure you want to delete this request?")) {
 		  if (request.id) {
 			 await requestAPI.delete(request.id);
-			 let updatedMovies = requests.filter((r) => r.id !== request.id);
-			 setRequests(updatedMovies);
+			 let updatedRequests = requests.filter((r) => r.id !== request.id);
+			 setRequests(updatedRequests);
 			 toast.success("Successfully deleted.");
 		  }
 		}

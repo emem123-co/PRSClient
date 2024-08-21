@@ -18,6 +18,8 @@ import CreateProductPage from "./products/CreateProductPage";
 import EditProductPage from "./products/EditProductPage";
 import CreateRequestPage from "./requests/CreateRequestPage";
 import RequestListPage from "./requests/RequestListPage";
+import EditRequestPage from "./requests/EditRequestPage";
+import RequestDetailPage from "./requests/RequestDetailPage";
 
 function App() {
 	return (
@@ -47,9 +49,9 @@ function App() {
 							{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 							<Route path="/requests" element={<RequestListPage />} />
-							{/* <Route path="/requests/create" element={<CreateRequestPage />} /> */}
-							{/* <Route path="/requests/edit/:id" element={<EditRequestPage />} /> */}
-							{/* <Route path="/requests/delete/:id" element={</>} /> */}
+							<Route path="/requests/detail/:id" element={<RequestDetailPage />} />
+							<Route path="/requests/create" element={<CreateRequestPage />} />
+							<Route path="/requests/edit/:id" element={<EditRequestPage />} />
 
 
 						</Routes>
