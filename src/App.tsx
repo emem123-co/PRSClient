@@ -47,8 +47,8 @@ function App() {
 							{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 							<Route path="/requests" element={<RequestListPage />} />
-							<Route path="/requests/create" element={<CreateRequestPage />} />
-							<Route path="/requests/edit/:id" element={<EditRequestPage />} />
+							{/* <Route path="/requests/create" element={<CreateRequestPage />} /> */}
+							{/* <Route path="/requests/edit/:id" element={<EditRequestPage />} /> */}
 							{/* <Route path="/requests/delete/:id" element={</>} /> */}
 
 

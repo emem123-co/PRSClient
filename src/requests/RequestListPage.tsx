@@ -9,7 +9,7 @@ function RequestListPage() {
 			<div>
 				<section className="container-fluid bg-white">
 					<div className="d-flex justify-content-between align-items-center m-0 px-1">
-						<p className="m-0 fw-normal fs-5">Request List</p>
+						<p className="m-0 fw-normal fs-5">Requests</p>
 						<Link className="btn btn-primary fw-light fs-6" to={"./create"}>
 							+ Request
 						</Link>

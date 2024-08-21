@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Request } from "./Request";
 import { requestAPI } from "./RequestAPI";
+import RequestTableRow from "./RequestTableRow";
+import toast from "react-hot-toast";
 
 
 function RequestList() {
@@ -9,45 +11,64 @@ function RequestList() {
 	
 
 	async function loadRequests() {
+		try {
 		setBusy(true);
 		let data = await requestAPI.list();
 		setRequests(data);
+	} catch (error: any) {
+		toast.error(error.message);
+	} finally {
 		setBusy(false);
 	}
+}
+
+	
 
 	useEffect(() => {
 		loadRequests();
 	}, []);
 
+	async function remove(request: Request) {
+		if (confirm("Are you sure you want to delete this Movie?")) {
+		  if (request.id) {
+			 await requestAPI.delete(request.id);
+			 let updatedMovies = requests.filter((r) => r.id !== request.id);
+			 setRequests(updatedMovies);
+			 toast.success("Successfully deleted.");
+		  }
+		}
+	 }
+
 	return (
-		<div className="container-fluid bg-white d-flex flex-wrap gap-4">
-			{requests.map((request) => (
-				<div className="card p-2" key={request.id}>
-					<div className="d-flex flex-column">
-
-					<strong>{request.name}</strong>
-					<span>
-						{request.price} / {request.unit}
-					</span>
-
-					<div className="d-flex flex-column p-0 m-0 gap-1">
-						<small>{request.vendor?.name}</small> 
-						<small className="d-flex justify-content-center rounded-2 text-bg-dark text-white" style={{width: 130}}>
-							{request.partNbr}
-						</small>
-					</div>
-					</div>
-				</div>
-			))}
-			;
-		</div>
-	);
+			<>
+				{busy && (
+        			<section className="d-flex justify-content-center align-items-center align-content-center vh-100">
+						<div className=" spinner-border text-primary" role="status">
+							<span className="visually-hidden">Loading...</span>
+						</div>
+        			</section>
+      )}
+		<table className="table table-hover w-75">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Description</th>
+							<th>Status</th>
+							<th>Total</th>
+							<th>Requested By</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{requests.map((request) => (
+							<RequestTableRow key={request.id} request={request} onRemove={remove} />
+					
+						))}
+					</tbody>
+					</table>
+			</>
+	)
 }
 export default RequestList;
 
-{
-	/* <span>
-	<Link to={`/requests/edit/${request.id}`}>edit</Link> |{" "}
-	<Link to={`/requests/delete/${request.id}`}>delete</Link>
-</span> */
-}
+

@@ -3,15 +3,12 @@
 //price autorenders depdning on product
 //total autoupdates and renders in real time
 
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 function RequestLinesForm() {
-
-
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
@@ -27,9 +24,7 @@ function RequestLinesForm() {
 								type="text"
 								id="name"
 							/>
-							<div className="invalid-feedback">
-								{errors.name?.message}
-							</div>
+							<div className="invalid-feedback">{errors.name?.message}</div>
 						</div>
 
 						<div className="d-flex flex-column w-100">
@@ -42,9 +37,7 @@ function RequestLinesForm() {
 								type="text"
 								id="partNbr"
 							/>
-							<div className="invalid-feedback">
-								{errors.partNbr?.message}
-							</div>
+							<div className="invalid-feedback">{errors.partNbr?.message}</div>
 						</div>
 					</div>
 
@@ -59,9 +52,7 @@ function RequestLinesForm() {
 								type="text"
 								id="price"
 							/>
-							<div className="invalid-feedback">
-								{errors.price?.message}
-							</div>
+							<div className="invalid-feedback">{errors.price?.message}</div>
 						</div>
 
 						<div className="d-flex">
@@ -75,9 +66,7 @@ function RequestLinesForm() {
 									type="text"
 									id="unit"
 								/>
-								<div className="invalid-feedback">
-									{errors.unit?.message}
-								</div>
+								<div className="invalid-feedback">{errors.unit?.message}</div>
 							</div>
 
 							<div className="w-50 align-content-end ps-3">
@@ -94,9 +83,7 @@ function RequestLinesForm() {
 										</option>
 									))}
 								</select>
-								<div className="Please choose vendor(s).">
-									{errors?.vendorId?.message}
-								</div>
+								<div className="Please choose vendor(s).">{errors?.vendorId?.message}</div>
 							</div>
 						</div>
 					</div>
