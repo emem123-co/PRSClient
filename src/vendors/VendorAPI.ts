@@ -12,9 +12,7 @@ export const vendorAPI = {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
 
-	// delete(id: number) {
-	// 	return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
-	// },
+
 
 	post(vendor: Vendor): Promise<Vendor> {
 		return fetch(`${url}`, {

@@ -1,19 +1,19 @@
 import { BASE_URL, checkStatus, parseJSON } from "../utility/fetchUtilities";
-import { Product } from "./Product";
+import { Request } from "./Request";
 
-let url = `${BASE_URL}/products`;
+let url = `${BASE_URL}/requests`;
 
 function replacer(key: string, value: any) {
 	if (key === "vendor") return undefined;
 	return value;
 }
 
-export const productAPI = {
-	list(): Promise<Product[]> {
+export const requestAPI = {
+	list(): Promise<Request[]> {
 		return fetch(`${url}?_sort=name&_order=asc`).then(checkStatus).then(parseJSON);
 	},
 
-	find(id: number): Promise<Product[]> {
+	find(id: number): Promise<Request[]> {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
 
@@ -21,10 +21,10 @@ export const productAPI = {
 		return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
 	},
 
-	post(product: Product) {
+	post(request: Request) {
 		return fetch(`${url}`, {
 			method: "POST",
-			body: JSON.stringify(product, replacer),
+			body: JSON.stringify(request, replacer),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -33,10 +33,10 @@ export const productAPI = {
 			.then(parseJSON);
 	},
 
-	put(product: Product) {
-		return fetch(`${url}/${product.id}`, {
+	put(request: Request) {
+		return fetch(`${url}/${request.id}`, {
 			method: "PUT",
-			body: JSON.stringify(product),
+			body: JSON.stringify(request),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -45,13 +45,13 @@ export const productAPI = {
 			.then(parseJSON);
 	},
 
-	insert(product: Product) {
+	insert(request: Request) {
 		fetch(url, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(product),
+			body: JSON.stringify(request),
 		})
 			.then(checkStatus)
 			.then(parseJSON);

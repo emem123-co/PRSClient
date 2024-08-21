@@ -16,6 +16,8 @@ import {Toaster} from "react-hot-toast"
 import ProductListPage from "./products/ProductListPage";
 import CreateProductPage from "./products/CreateProductPage";
 import EditProductPage from "./products/EditProductPage";
+import CreateRequestPage from "./requests/CreateRequestPage";
+import RequestListPage from "./requests/RequestListPage";
 
 function App() {
 	return (
@@ -43,6 +45,11 @@ function App() {
 							<Route path="/products/create" element={<CreateProductPage />} />
 							<Route path="/products/edit/:id" element={<EditProductPage />} />
 							{/* <Route path="/products/delete/:id" element={</>} /> */}
+
+							<Route path="/requests" element={<RequestListPage />} />
+							<Route path="/requests/create" element={<CreateRequestPage />} />
+							<Route path="/requests/edit/:id" element={<EditRequestPage />} />
+							{/* <Route path="/requests/delete/:id" element={</>} /> */}
 
 
 						</Routes>

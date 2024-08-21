@@ -1,14 +1,16 @@
-import { Vendor } from "../vendors/Vendor";
+import { User } from "../users/User";
+// import { RequestLines } from "../requestlines/requestline;
 
-export class Product {
+export class Request {
 	id: number | undefined;
 	partNbr = "";
 	name = "";
 	price = "";
 	unit = "";
 	photoPath = "";
-	vendorId: number | undefined;
-	vendor: Vendor | undefined;
+	userId: number | undefined;
+	user: User | undefined;
+	// requestlines: Requestlines[] | undefined;
 
 	get isNew(): boolean {
 		return this.id === undefined;
@@ -22,7 +24,8 @@ export class Product {
 		if (initializer.price) this.price = initializer.price;
 		if (initializer.unit) this.unit = initializer.unit;
 		if (initializer.photoPath) this.photoPath = initializer.photoPath;
-		if (initializer.vendorId) this.vendorId = initializer.vendorId;
-		if (initializer.vendor) this.vendor = initializer.vendor;
+		if (initializer.userId) this.userId = initializer.userId;
+		if (initializer.user) this.user = initializer.user;
+		if (initializer.requestline) this.requestlines = initializer.requestline;
 	}
 }
