@@ -3,19 +3,14 @@
 //includes Add RequestLine Item button
 import { SyntheticEvent, useEffect, useState } from "react";
 import { RequestLine } from "./RequestLine";
-import toast from "react-hot-toast";
-import { requestLineAPI } from "./RequestLineAPI";
+
 import { Link } from "react-router-dom";
 
 interface RequestLinesTableProps {
 	requestLines: RequestLine[] | undefined;
- }
+}
 
-function RequestLinesTable({requestLines }: RequestLinesTableProps) {
-	
-
-	
-
+function RequestLinesTable({ requestLines }: RequestLinesTableProps) {
 	// async function remove(requestLine: RequestLine) {
 	// 	if (confirm("Are you sure you want to delete this requestlines?")) {
 	// 		if (requestLine.id) {
@@ -29,21 +24,19 @@ function RequestLinesTable({requestLines }: RequestLinesTableProps) {
 
 	return (
 		<>
-		
 			<div className="container container-fluid">
 				<hr className="pt-2" />
 				<table className="table table-hover border border-3">
-						<thead className="">
-							<tr className="w-100">
-								<th className="px-4">Product</th>
-								<th className="pe-4">Price</th>
-								<th className="pe-4">Quantity</th>
-								<th className="pe-4">Line Total</th>
-								<th className="pe-4"> </th>
-							</tr>
-						</thead>
-	
-               
+					<thead className="">
+						<tr className="w-100">
+							<th className="px-4">Product</th>
+							<th className="pe-4">Price</th>
+							<th className="pe-4">Quantity</th>
+							<th className="pe-4">Line Total</th>
+							<th className="pe-4"> </th>
+						</tr>
+					</thead>
+
 					{requestLines?.map((requestLine) => (
 						<tbody key={requestLine.id}>
 							<td>{requestLine.product?.name}</td>

@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { requestAPI } from "./RequestAPI";
 import { Request } from "./Request";
 import RequestLinesTable from "../requestlines/RequestLinesTable";
+import EditRequest from "./EditRequest";
 
 
 function RequestDetailsPage() {
@@ -49,9 +50,9 @@ function RequestDetailsPage() {
 								Send for Review
 							</button>
 
-							<Link to="./detail/edit/:id" className="btn btn-outline-primary fw-light fs-6">
-								Edit
-							</Link>
+									<Link to="./edit" className="btn btn-outline-primary fw-light fs-6">
+										Edit
+									</Link>
 						</div>
 
 						<div className="d-flex gap-3">
@@ -62,12 +63,16 @@ function RequestDetailsPage() {
 							<button type="submit" className="btn btn-danger fw-light fs-6">
 								Reject
 							</button>
-							<Link to="/requests/detail/edit/:id" className="btn btn-outline-primary fw-light fs-6">
+							<Link to="./edit" className="btn btn-outline-primary fw-light fs-6">
 								Edit
 							</Link>
 						</div>
 					</div>
 				</div>
+
+
+
+
 				<hr />
 				<div className="container-fluid bg-white">
 					<div className="d-flex justify-content-between align-items-center m-0 px-1">
@@ -80,35 +85,54 @@ function RequestDetailsPage() {
 						)}
 
 						<div className="container container-fluid">
-							<div className="d-flex p-2 gap-5 justify-content-start">
-								<div className="d-flex flex-column gap-2">
-									<div>Description</div>
-									<small>{request?.description}</small>
 
-									<div>Justification</div>
-									<small>{request?.justification}</small>
+							{/* {URL = http://localhost:5175/requests/detail/{requestID}/edit && 
+							
+							send for review & cancel buttons (in EditForm)
+							<EditRequest /> 
+							
+							)} */}
+
+							{requestId && (
+								// {userId !=== request.userId && (
+									
+								// 	approve reject edit header)}
+
+								// {userId === request.userId && (
+									
+								// 	edit header)}
+
+
+								<div className="d-flex p-2 gap-5 justify-content-start">
+									<div className="d-flex flex-column gap-2">
+										<div>Description</div>
+										<small>{request?.description}</small>
+
+										<div>Justification</div>
+										<small>{request?.justification}</small>
+									</div>
+									<div className="d-flex flex-column gap-2">
+										<div>Delivery Method</div>
+										<small>{request?.deliveryMode}</small>
+
+										<div>Status</div>
+										<small>{request?.status}</small>
+									</div>
+
+									<div className="d-flex flex-column gap-2">
+										<div>Requested By</div>
+										<small>
+											<span>
+												{request?.user?.firstName}
+												{request?.user?.lastName}
+											</span>
+										</small>
+									</div>
 								</div>
-
-								<div className="d-flex flex-column gap-2">
-									<div>Delivery Method</div>
-									<small>{request?.deliveryMode}</small>
-
-									<div>Status</div>
-									<small>{request?.status}</small>
-								</div>
-
-								<div className="d-flex flex-column gap-2">
-									<div>Requested By</div>
-									<small>
-										<span>
-											{request?.user?.firstName}
-											{request?.user?.lastName}
-										</span>
-									</small>
-								</div>
-							</div>
-							<RequestLinesTable requestLines={request?.requestlines} />
+							)}
+								<RequestLinesTable requestLines={request?.requestlines} />
 						</div>
+
 					</div>
 				</div>
 			</section>

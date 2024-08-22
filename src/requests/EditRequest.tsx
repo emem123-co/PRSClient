@@ -9,7 +9,7 @@ import { Request } from "./Request";
 import RequestLinesTable from "../requestlines/RequestLinesTable";
 import RequestForm from "./RequestForm";
 
-function CreateRequestPage() {
+function EditRequest() {
 	let { requestId: requestIdAsString } = useParams<{ requestId: string }>();
 	let requestId = Number(requestIdAsString);
 	const navigate = useNavigate();
@@ -37,41 +37,41 @@ function CreateRequestPage() {
 		try {
 			if (request.isNew) {
 				await requestAPI.post(request);
+				navigate(`/detail/${requestId}`);
+				navigate("./requests")
 				toast.success("Success!");
-				navigate("./requests");
+
 			} else {
 				await requestAPI.put(request);
-				toast.success("Success!");
-				navigate("./requests");
+				navigate(`/detail/${requestId}`);
 			}
 		} catch (error: any) {
 			toast.error(error.message);
 		}
 	};
-
 	return (
 		<>
-			<section>
-				<div className="container-fluid bg-white">
+			<section className="container-fluid bg-white">
 				<div className="d-flex justify-content-between align-items-center m-0 px-1">
-					<div className="m-0 fw-normal fs-5">Create Request</div>
+					<div className="m-0 fw-normal fs-5">Edit Request</div>
 
 					<div className="d-flex gap-3">
 						{/* <button type="submit" className="btn btn-primary fw-light fs-6" onSubmit={handleSubmit(save)}>
 							Send for Review
 						</button> */}
 
-						<Link to={`/requests`} className="btn btn-outline-primary fw-light fs-6">
+						<Link to={`/requests/detail/${requestId}`} className="btn btn-outline-primary fw-light fs-6">
 							Cancel
 						</Link>
 					</div>
 				</div>
 				<hr />
-						<RequestForm />
+
+				<div className="pt-2">
+					<RequestForm />
 				</div>
-				<hr></hr>
 			</section>
 		</>
 	);
 }
-export default CreateRequestPage;
+export default EditRequest;

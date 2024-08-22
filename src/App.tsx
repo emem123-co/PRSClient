@@ -18,11 +18,12 @@ import CreateProductPage from "./products/CreateProductPage";
 import EditProductPage from "./products/EditProductPage";
 import CreateRequestPage from "./requests/CreateRequestPage";
 import RequestListPage from "./requests/RequestListPage";
-import EditRequestPage from "./requests/EditRequestPage";
+import EditRequestPage from "./requests/EditRequest";
 import RequestDetailPage from "./requests/RequestDetailsPage";
 import CreateRequestLinePage from "./requestlines/CreateRequestLinePage copy";
 import EditRequestLinePage from "./requestlines/EditRequestLinePage";
 import RequestDetailsPage from "./requests/RequestDetailsPage";
+import EditRequest from "./requests/EditRequest";
 
 function App() {
 	return (
@@ -52,12 +53,15 @@ function App() {
 							{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 							<Route path="/requests" element={<RequestListPage />} />
+							<Route path="/requests/detail/:requestId/edit" element={<EditRequest />} />
 							<Route path="/requests/detail/:requestId" element={<RequestDetailsPage />} />
 							<Route path="/requests/create" element={<CreateRequestPage />} />
+							
 
 							<Route path="/requestlines" element={<RequestListPage />} />
-							{/* <Route path="/requestslines/create" element={<CreateRequestLinePage />} />
-							<Route path="/requestslines/detail/edit/:requestLineId" element={<EditRequestLinePage />} /> */}
+							<Route path="/requests/detail/:requestId/requestlines/create" element={<CreateRequestLinePage />} />
+							<Route path="/requests/detail/:requestId/edit/:requestLinesId" element={<EditRequestLinePage />} />
+
 						</Routes>
 					</section>
 				</main>

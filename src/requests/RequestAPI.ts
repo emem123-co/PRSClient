@@ -18,8 +18,6 @@ export const requestAPI = {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
 
-	
-
 	delete(id: number) {
 		return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
 	},
@@ -33,11 +31,10 @@ export const requestAPI = {
 			},
 		})
 			.then(checkStatus)
-			.then(parseJSON);
 	},
 
 	put(request: Request) {
-		return fetch(`${url}/edit/${request.id}`, {
+		return fetch(`${url}/${request.id}`, {
 			method: "PUT",
 			body: JSON.stringify(request),
 			headers: {
@@ -45,7 +42,6 @@ export const requestAPI = {
 			},
 		})
 			.then(checkStatus)
-			.then(parseJSON);
 	},
 
 	insert(request: Request) {
@@ -62,5 +58,5 @@ export const requestAPI = {
 
 	defaultValues(request: Request): import("./Request").Request[] {
 		throw new Error("Function not implemented.");
-	}
+	},
 };
