@@ -1,5 +1,5 @@
 import { User } from "../users/User";
-import { RequestLines }  from "../requestlines/RequestLines"
+import { RequestLine }  from "../requestlines/RequestLine"
 
 export class Request {
 	id: number | undefined;
@@ -10,7 +10,7 @@ export class Request {
 	status = "";
 	userId: number | undefined;
 	user: User | undefined;
-	requestlines: RequestLines[] | undefined;
+	requestlines: RequestLine[] | undefined;
 
 	get isNew(): boolean {
 		return this.id === undefined;
@@ -26,6 +26,6 @@ export class Request {
 		if (initializer.status) this.status = initializer.status;
 		if (initializer.userId) this.userId = initializer.userId;
 		if (initializer.user) this.user = initializer.user;
-		if (initializer.requestline) this.requestlines = initializer.requestline;
+		if (initializer.requestlines) this.requestlines = initializer.requestlines;
 	}
 }

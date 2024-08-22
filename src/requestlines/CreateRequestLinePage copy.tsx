@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { RequestLines } from "./RequestLines";
 
 function CreateRequestLinePage() {
 	<section className="container-fluid bg-white">

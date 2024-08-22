@@ -1,7 +1,7 @@
 import { Product } from "../products/Product";
 import { Request } from "../requests/Request";
 
-export class RequestLines {
+export class RequestLine {
 	id: number | undefined;
 	
 	requestId: number | undefined;

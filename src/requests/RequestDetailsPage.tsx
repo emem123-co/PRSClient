@@ -6,92 +6,111 @@
 //if user is not review, add message that says they dont have permission to review requests (or just disable approve/reject buttons)
 
 //if reject button is clicked, add rejection reason
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams, } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { requestAPI } from "./RequestAPI";
 import { Request } from "./Request";
-import RequestDetails from "./RequestDetails";
-import {  useForm, } from "react-hook-form";
+import RequestLinesTable from "../requestlines/RequestLinesTable";
 
 
 function RequestDetailsPage() {
+	let { requestId: requestIdAsAString } = useParams<{ requestId: string }>();
+	const requestId = Number(requestIdAsAString);
 	const [requests, setRequests] = useState<Request[]>([]);
 	const [busy, setBusy] = useState(false);
-	const navigate = useNavigate();
-	
+	const request = requests.find((request) => request.id === requestId);
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<Request>({});
-
-	async function loadRequest() {
-		if (requests) {
+	async function loadRequest(id: number) {
+		try {
+			if (requestId) return;
 			setBusy(true);
-			let currentRequest = await requestAPI.find(Number());
-			setRequests(currentRequest);
+			const data = await requestAPI.find(requestId);
+			setRequests(data);
+		} catch (error: any) {
+			toast.error(error.message);
+		} finally {
 			setBusy(false);
-			return currentRequest;
 		}
 	}
 
 	useEffect(() => {
-		loadRequest();
+		loadRequest(requestId);
 	}, []);
 
-	
-		
-
-	async function sendReview(request:Request) {
-	try {
-		if (request.isNew) {
-			await requestAPI.post(request);
-			navigate("/detail");
-				toast.success("Request submitted!");
-		} else {
-			await requestAPI.put(request)
-		}
-	} catch (error: any) {
-		toast.error(error.message)
-	}}
-
-
-		
 
 	return (
 		<>
-			<section className="container-fluid bg-white">
-				<div className="d-flex justify-content-between align-items-center m-0 px-1">
-					<div className="m-0 fw-normal fs-5">Request Details</div>
-					<div className="d-flex gap-3">
-						<button type="submit" className="btn btn-primary fw-light fs-6" onSubmit={handleSubmit(sendReview)}>
-							Send for Review
-						</button>
+			<section>
+				<div className="container-fluid bg-white">
+					<div className="d-flex justify-content-between align-items-center m-0 px-1">
+						<div className="m-0 fw-normal fs-5">Request Details</div>
+						<div className="d-flex gap-3">
+							<button type="submit" className="btn btn-primary fw-light fs-6">
+								Send for Review
+							</button>
 
-						<Link to="./detail/edit/:id" className="btn btn-outline-primary fw-light fs-6">
-							Edit
-						</Link>
-					</div>
+							<Link to="./detail/edit/:id" className="btn btn-outline-primary fw-light fs-6">
+								Edit
+							</Link>
+						</div>
 
-					<div className="d-flex gap-3">
-						<button type="submit" className="btn btn-success fw-light fs-6">
-							Approve
-						</button>
+						<div className="d-flex gap-3">
+							<button type="submit" className="btn btn-success fw-light fs-6">
+								Approve
+							</button>
 
-						<button type="submit" className="btn btn-danger fw-light fs-6">
-							Reject
-						</button>
-						<Link to="/requests/detail/edit/:id" className="btn btn-outline-primary fw-light fs-6">
-							Edit
-						</Link>
+							<button type="submit" className="btn btn-danger fw-light fs-6">
+								Reject
+							</button>
+							<Link to="/requests/detail/edit/:id" className="btn btn-outline-primary fw-light fs-6">
+								Edit
+							</Link>
+						</div>
 					</div>
 				</div>
 				<hr />
+				<div className="container-fluid bg-white">
+					<div className="d-flex justify-content-between align-items-center m-0 px-1">
+						{busy && (
+							<section className="container-fluid bg-white">
+								<div className=" spinner-border text-primary" role="status">
+									<span className="visually-hidden">Loading...</span>
+								</div>
+							</section>
+						)}
 
-				<div className="p-2">
-					<RequestDetails id={undefined} description={""} justification={""} rejectionReasoning={""} deliveryMode={""} status={""} userId={undefined} user={undefined} requestlines={undefined} isNew={false} />
+						<div className="container container-fluid">
+							<div className="d-flex p-2 gap-5 justify-content-start">
+								<div className="d-flex flex-column gap-2">
+									<div>Description</div>
+									<small>{request?.description}</small>
+
+									<div>Justification</div>
+									<small>{request?.justification}</small>
+								</div>
+
+								<div className="d-flex flex-column gap-2">
+									<div>Delivery Method</div>
+									<small>{request?.deliveryMode}</small>
+
+									<div>Status</div>
+									<small>{request?.status}</small>
+								</div>
+
+								<div className="d-flex flex-column gap-2">
+									<div>Requested By</div>
+									<small>
+										<span>
+											{request?.user?.firstName}
+											{request?.user?.lastName}
+										</span>
+									</small>
+								</div>
+							</div>
+							<RequestLinesTable />
+						</div>
+					</div>
 				</div>
 			</section>
 		</>

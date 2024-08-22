@@ -11,6 +11,7 @@ import { vendorAPI } from "../vendors/VendorAPI";
 
 function ProductForm() {
 	let { productId: productIdAsString } = useParams<{ productId: string }>();
+	
 	let { vendorId: vendorIdAsString } = useParams<{ vendorId: string }>();
 	let productId = Number(productIdAsString);
 	let vendorId = Number(vendorIdAsString);

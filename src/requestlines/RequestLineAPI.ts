@@ -1,5 +1,5 @@
 import { BASE_URL, checkStatus, parseJSON } from "../utility/fetchUtilities";
-import { RequestLines } from "../requestlines/RequestLines";
+import { RequestLine } from "../requestlines/RequestLine";
 
 let url = `${BASE_URL}/requests`;
 
@@ -9,19 +9,21 @@ function replacer(key: string, value: any) {
 }
 
 export const requestLineAPI = {
-	list(): Promise<RequestLines[]> {
+	list(): Promise<RequestLine[]> {
 		return fetch(`${url}?_sort=name&_order=asc`).then(checkStatus).then(parseJSON);
 	},
 
-	find(id: number): Promise<RequestLines[]> {
+	find(id: number): Promise<RequestLine[]> {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
+
+	
 
 	delete(id: number) {
 		return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
 	},
 
-	post(requestlines: RequestLines) {
+	post(requestlines: RequestLine) {
 		return fetch(`${url}`, {
 			method: "POST",
 			body: JSON.stringify(requestlines, replacer),
@@ -33,7 +35,7 @@ export const requestLineAPI = {
 			.then(parseJSON);
 	},
 
-	put(requestlines: RequestLines) {
+	put(requestlines: RequestLine) {
 		return fetch(`${url}/${requestlines.id}`, {
 			method: "PUT",
 			body: JSON.stringify(requestlines),
@@ -45,7 +47,7 @@ export const requestLineAPI = {
 			.then(parseJSON);
 	},
 
-	insert(requestlines: RequestLines) {
+	insert(requestlines: RequestLine) {
 		fetch(url, {
 			method: "POST",
 			headers: {

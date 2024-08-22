@@ -63,6 +63,7 @@ function RequestList() {
 						{requests.map((request) => (
 							<RequestTableRow key={request.id} request={request} onRemove={remove} />
 							
+							
 						))}
 					</tbody>
 					</table>

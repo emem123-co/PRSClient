@@ -1,10 +1,11 @@
+import { requestLineAPI } from "../requestlines/RequestLineAPI";
 import { BASE_URL, checkStatus, parseJSON } from "../utility/fetchUtilities";
 import { Request } from "./Request";
 
 let url = `${BASE_URL}/requests`;
 
 function replacer(key: string, value: any) {
-	if (key === "vendor") return undefined;
+	if (key === "") return undefined;
 	return value;
 }
 
@@ -16,6 +17,8 @@ export const requestAPI = {
 	find(id: number): Promise<Request[]> {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
+
+	
 
 	delete(id: number) {
 		return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
