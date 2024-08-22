@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import VendorForm from "./UserForm";
+import UserForm from "./UserForm";
 import { Link } from "react-router-dom";
 
-function EditVendorPage() {
+function EditUserPage() {
 	return (
 		<>
 			<div>
@@ -16,11 +16,11 @@ function EditVendorPage() {
 					</div>
 					<hr />
 					<div className="pt-2">
-						<VendorForm />
+						<UserForm  />
 					</div>
 				</section>
 			</div>
 		</>
 	);
 }
-export default EditVendorPage;
+export default EditUserPage;

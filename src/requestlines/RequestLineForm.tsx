@@ -6,13 +6,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 function RequestLinesForm() {
+	
+
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
-				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)}>
+				<form className="d-flex flex-wrap flex-row w-75" onSubmit={}>
 					<div className="d-flex row-1 gap-3 w-100">
 						<div className="d-flex flex-column w-100">
 							<label className="form-label" htmlFor="name">
@@ -114,3 +116,7 @@ function RequestLinesForm() {
 }
 
 export default RequestLinesForm;
+
+function register(arg0: string, arg1: { required: string; }): import("react/jsx-runtime").JSX.IntrinsicAttributes & import("react").ClassAttributes<HTMLInputElement> & import("react").InputHTMLAttributes<HTMLInputElement> {
+	throw new Error("Function not implemented.");
+}

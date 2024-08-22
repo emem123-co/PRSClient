@@ -150,7 +150,7 @@ function VendorForm() {
 
 					<div className="pt-4 gap-3 row-5 d-flex flex-row w-100  justify-content-end ">
 						<div className="d-flex gap-3 pt-3">
-							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={"/vendors"}>
+							<Link className="btn btn-outline-secondary fw-light fs-6 border" to="/vendors">
 								Cancel
 							</Link>
 							<button type="submit" className="btn btn-primary fw-light fs-6">

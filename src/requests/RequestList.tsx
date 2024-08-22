@@ -37,10 +37,12 @@ function RequestList() {
 		}
 	 }
 
-	return (
+	 
+		
+		return (
 			<>
 				{busy && (
-        			<section className="d-flex justify-content-center align-items-center align-content-center vh-100">
+					<section className="d-flex justify-content-center align-items-center align-content-center vh-100">
 						<div className=" spinner-border text-primary" role="status">
 							<span className="visually-hidden">Loading...</span>
 						</div>
@@ -60,13 +62,14 @@ function RequestList() {
 					<tbody>
 						{requests.map((request) => (
 							<RequestTableRow key={request.id} request={request} onRemove={remove} />
-					
+							
 						))}
 					</tbody>
 					</table>
 			</>
 	)
 }
+
 export default RequestList;
 
 

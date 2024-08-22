@@ -23,8 +23,8 @@ function RequestTableRow({ request, onRemove }: RequestTableRowProps) {
       </td>
       <td>
         <div className="d-flex gap-2">
-          <Link className="small" to={`/requests/edit/${request.id}`}>
-            edit
+          <Link className="small" to={`/requests/detail/${request.id}`}>
+            review
           </Link>
           |
           <a

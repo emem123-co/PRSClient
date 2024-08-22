@@ -6,6 +6,7 @@ import { RequestLines } from "./RequestLines";
 import RequestLineRow from  "../requestlines/RequestLineRow";
 import toast from "react-hot-toast";
 import { requestLineAPI } from "./RequestLineAPI";
+import { Link } from "react-router-dom";
 
 function RequestLinesTable() {
       const [requestLines, setRequestLines] = useState<RequestLines[]>([]);
@@ -70,6 +71,9 @@ function RequestLinesTable() {
                   
                      ))}
                   </tbody>
+                  </div >
+                  <div className="d-flex w-100 p-4 justify-content-end">
+                     <Link type="button" className="btn btn-outline-secondary w-100" to="./requestlines/create">+ Items</Link>
                   </div>
                   </table>
                   </div>

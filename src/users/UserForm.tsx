@@ -5,7 +5,6 @@ import { User } from "./User";
 import { useForm } from "react-hook-form";
 import { userAPI } from "./UserAPI";
 import toast from "react-hot-toast";
-import { error } from "jquery";
 
 function UserForm() {
 	const {

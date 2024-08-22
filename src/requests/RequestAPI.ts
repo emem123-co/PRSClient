@@ -34,7 +34,7 @@ export const requestAPI = {
 	},
 
 	put(request: Request) {
-		return fetch(`${url}/${request.id}`, {
+		return fetch(`${url}/edit/${request.id}`, {
 			method: "PUT",
 			body: JSON.stringify(request),
 			headers: {

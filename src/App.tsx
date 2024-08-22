@@ -12,14 +12,17 @@ import EditVendorPage from "./vendors/EditVendorPage";
 import UserListPage from "./users/UserListPage";
 import CreateUserPage from "./users/CreateUserPage";
 import EditUserPage from "./users/EditUserPage";
-import {Toaster} from "react-hot-toast"
+import { Toaster } from "react-hot-toast";
 import ProductListPage from "./products/ProductListPage";
 import CreateProductPage from "./products/CreateProductPage";
 import EditProductPage from "./products/EditProductPage";
 import CreateRequestPage from "./requests/CreateRequestPage";
 import RequestListPage from "./requests/RequestListPage";
 import EditRequestPage from "./requests/EditRequestPage";
-import RequestDetailPage from "./requests/RequestDetailPage";
+import RequestDetailPage from "./requests/RequestDetailsPage";
+import CreateRequestLinePage from "./requestlines/CreateRequestLinePage copy";
+import EditRequestLinePage from "./requestlines/EditRequestLinePage";
+import RequestDetailsPage from "./requests/RequestDetailsPage";
 
 function App() {
 	return (
@@ -27,7 +30,7 @@ function App() {
 			<>
 				<Header />
 				<main className="d-flex">
-						<NavMenu />
+					<NavMenu />
 					<section className="p-3 w-100">
 						<Routes>
 							<Route path="/" element={<Home />} />
@@ -49,11 +52,12 @@ function App() {
 							{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 							<Route path="/requests" element={<RequestListPage />} />
-							<Route path="/requests/detail/:id" element={<RequestDetailPage />} />
+							<Route path="/requests/detail/:id" element={<RequestDetailsPage />} />
 							<Route path="/requests/create" element={<CreateRequestPage />} />
-							<Route path="/requests/edit/:id" element={<EditRequestPage />} />
 
-
+							<Route path="/requestlines" element={<RequestListPage />} />
+							<Route path="/requestslines/create" element={<CreateRequestLinePage />} />
+							<Route path="/requestslines/detail/edit/:id" element={<EditRequestLinePage />} />
 						</Routes>
 					</section>
 				</main>
