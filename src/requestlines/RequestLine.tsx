@@ -1,15 +1,19 @@
+import { ReactNode } from "react";
 import { Product } from "../products/Product";
 import { Request } from "../requests/Request";
 
 export class RequestLine {
+  
+	
 	id: number | undefined;
 	
-	requestId: number | undefined;
+	requestID: number | undefined;
 	request: Request | undefined;
 
-   productId: number | undefined;
+   productID: number | undefined;
    product: Product | undefined;
-   quantity = ""
+   quantity = 0
+   total: ReactNode;
 
 	get isNew(): boolean {
 		return this.id === undefined;
@@ -18,9 +22,9 @@ export class RequestLine {
 	constructor(initializer?: any) {
 		if (!initializer) return;
 		if (initializer.id) this.id = initializer.id;
-		if (initializer.requestid) this.requestId = initializer.requestid;
+		if (initializer.requestID) this.requestID = initializer.requestID;
 		if (initializer.request) this.request = initializer.request;
-		if (initializer.productid) this.productId = initializer.productid;
+		if (initializer.productID) this.productID = initializer.productID;
 		if (initializer.product) this.product = initializer.product;
 		if (initializer.quantity) this.quantity = initializer.quantity;
 		

@@ -17,16 +17,15 @@ import RequestLinesTable from "../requestlines/RequestLinesTable";
 function RequestDetailsPage() {
 	let { requestId: requestIdAsAString } = useParams<{ requestId: string }>();
 	const requestId = Number(requestIdAsAString);
-	const [requests, setRequests] = useState<Request[]>([]);
+	const [request, setRequest] = useState<Request | undefined>(undefined);
 	const [busy, setBusy] = useState(false);
-	const request = requests.find((request) => request.id === requestId);
 
-	async function loadRequest(id: number) {
+	async function loadRequest() {
 		try {
-			if (requestId) return;
+			if (!requestId) return;
 			setBusy(true);
 			const data = await requestAPI.find(requestId);
-			setRequests(data);
+			setRequest(data);
 		} catch (error: any) {
 			toast.error(error.message);
 		} finally {
@@ -35,7 +34,7 @@ function RequestDetailsPage() {
 	}
 
 	useEffect(() => {
-		loadRequest(requestId);
+		loadRequest();
 	}, []);
 
 
@@ -108,7 +107,7 @@ function RequestDetailsPage() {
 									</small>
 								</div>
 							</div>
-							<RequestLinesTable />
+							<RequestLinesTable requestLines={request?.requestlines} />
 						</div>
 					</div>
 				</div>

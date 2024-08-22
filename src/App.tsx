@@ -52,12 +52,12 @@ function App() {
 							{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 							<Route path="/requests" element={<RequestListPage />} />
-							<Route path="/requests/detail/:id" element={<RequestDetailsPage />} />
+							<Route path="/requests/detail/:requestId" element={<RequestDetailsPage />} />
 							<Route path="/requests/create" element={<CreateRequestPage />} />
 
 							<Route path="/requestlines" element={<RequestListPage />} />
-							<Route path="/requestslines/create" element={<CreateRequestLinePage />} />
-							<Route path="/requestslines/detail/edit/:id" element={<EditRequestLinePage />} />
+							{/* <Route path="/requestslines/create" element={<CreateRequestLinePage />} />
+							<Route path="/requestslines/detail/edit/:requestLineId" element={<EditRequestLinePage />} /> */}
 						</Routes>
 					</section>
 				</main>

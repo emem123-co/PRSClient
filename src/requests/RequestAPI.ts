@@ -14,7 +14,7 @@ export const requestAPI = {
 		return fetch(`${url}?_sort=name&_order=asc`).then(checkStatus).then(parseJSON);
 	},
 
-	find(id: number): Promise<Request[]> {
+	find(id: number): Promise<Request> {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
 
@@ -27,7 +27,7 @@ export const requestAPI = {
 	post(request: Request) {
 		return fetch(`${url}`, {
 			method: "POST",
-			body: JSON.stringify(request, replacer),
+			body: JSON.stringify(request),
 			headers: {
 				"Content-Type": "application/json",
 			},
