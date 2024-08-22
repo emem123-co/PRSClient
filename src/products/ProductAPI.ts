@@ -56,4 +56,8 @@ export const productAPI = {
 			.then(checkStatus)
 			.then(parseJSON);
 	},
+
+	defaultValues(product: Product): import("./Product").Product[] {
+		throw new Error("Function not implemented.");
+	}
 };

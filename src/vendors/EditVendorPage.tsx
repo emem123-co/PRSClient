@@ -16,7 +16,8 @@ function EditVendorPage() {
 					</div>
 					<hr />
 					<div className="pt-2">
-						<VendorForm />
+					{/* <VendorForm /> */}
+						{/* copy in vendor form and place value={vendor.prop} attributes on the input tags to populate the current vendor */}
 					</div>
 				</section>
 			</div>

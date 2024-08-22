@@ -16,7 +16,8 @@ function EditUserPage() {
 					</div>
 					<hr />
 					<div className="pt-2">
-						<UserForm  />
+						{/* <UserForm /> */}
+						{/* copy in user form and place value={user.prop} attributes on the input tags to populate the current user */}
 					</div>
 				</section>
 			</div>

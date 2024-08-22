@@ -49,4 +49,8 @@ export const vendorAPI = {
 			.then(checkStatus)
 			.then(parseJSON);
 	},
+
+	defaultValues(vendor: Vendor): import("./Vendor").Vendor[] {
+		throw new Error("Function not implemented.");
+	}
 };

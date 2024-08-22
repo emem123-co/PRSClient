@@ -16,7 +16,8 @@ function EditProductPage() {
 					</div>
 					<hr />
 					<div className="pt-2">
-						<ProductForm />
+						{/* <ProductForm /> */}
+						{/* copy in product form and place value={product.prop} attributes on the input tags to populate the current product */}
 					</div>
 				</section>
 			</div>

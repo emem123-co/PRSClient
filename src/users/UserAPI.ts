@@ -47,7 +47,11 @@ export const userAPI = {
 			},
 			body: JSON.stringify(user)
 		}).then(checkStatus).then(parseJSON);
-			}
+			},
+
+	defaultValues(user: User): import("./User").User[] {
+		throw new Error("Function not implemented.");
+	}
 		
 	 };
 

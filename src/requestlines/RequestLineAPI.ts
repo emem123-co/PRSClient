@@ -23,10 +23,10 @@ export const requestLineAPI = {
 		return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
 	},
 
-	post(requestlines: RequestLine) {
+	post(requestLine: RequestLine) {
 		return fetch(`${url}`, {
 			method: "POST",
-			body: JSON.stringify(requestlines, replacer),
+			body: JSON.stringify(requestLine, replacer),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -35,10 +35,10 @@ export const requestLineAPI = {
 			.then(parseJSON);
 	},
 
-	put(requestlines: RequestLine) {
-		return fetch(`${url}/${requestlines.id}`, {
+	put(requestLine: RequestLine) {
+		return fetch(`${url}/${requestLine.id}`, {
 			method: "PUT",
-			body: JSON.stringify(requestlines),
+			body: JSON.stringify(requestLine),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -47,15 +47,19 @@ export const requestLineAPI = {
 			.then(parseJSON);
 	},
 
-	insert(requestlines: RequestLine) {
+	insert(requestLine: RequestLine) {
 		fetch(url, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(requestlines),
+			body: JSON.stringify(requestLine),
 		})
 			.then(checkStatus)
 			.then(parseJSON);
 	},
+
+	defaultValues(requestLine: RequestLine): import("./RequestLine").RequestLine[] {
+		throw new Error("Function not implemented.");
+	}
 };

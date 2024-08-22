@@ -59,4 +59,8 @@ export const requestAPI = {
 			.then(checkStatus)
 			.then(parseJSON);
 	},
+
+	defaultValues(request: Request): import("./Request").Request[] {
+		throw new Error("Function not implemented.");
+	}
 };

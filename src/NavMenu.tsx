@@ -7,11 +7,7 @@ function NavMenu() {
 				<main className="pt-3 bg-secondary-subtle">
 					<nav>
 						<ul className="nav flex-column nav-pills px-4">
-							<li className="nav-item">
-								<NavLink className="nav-link" to="/purchases">
-									Purchases
-								</NavLink>
-							</li>
+							
 
 							<li className="nav-item">
 								<NavLink className="nav-link" to="/requests">
