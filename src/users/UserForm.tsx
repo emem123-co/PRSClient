@@ -2,16 +2,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { User } from "./User";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { userAPI } from "./UserAPI";
 import toast from "react-hot-toast";
 
 function UserForm() {
-
 	let { userId: userIdAsString } = useParams<{ userId: string }>();
 	let userId = Number(userIdAsString);
 	const navigate = useNavigate();
-
 
 	const {
 		register,
@@ -19,9 +17,8 @@ function UserForm() {
 		formState: { errors },
 	} = useForm<User>({
 		defaultValues: async () => {
-			
 			if (!userId) {
-				let newUser = new User( userId );
+				let newUser = new User(userId);
 				return Promise.resolve(newUser);
 			} else {
 				return await userAPI.find(userId);
@@ -29,18 +26,28 @@ function UserForm() {
 		},
 	});
 
-	
-	async function save(user: User) {
-		await userAPI.post(user);
+	const save: SubmitHandler<User> = async (user) => {
+		try {
+			if (user) {
+				await userAPI.post(user);
 
-		toast.success("Success!");
-		navigate("/users");
-	}
+				toast.success("Success!");
+				navigate("/users");
+			} else {
+				await userAPI.put(user);
+
+				toast.success("Update successful!");
+				navigate("/users");
+			}
+		} catch (error: any) {
+			toast.error(error.message);
+		}
+	};
 
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
-				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)}>
+				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)} noValidate>
 					<div className="d-flex w-100 gap-3">
 						<div className=" row-1 d-flex flex-column w-100">
 							<label className="form-label" htmlFor="firstName">
@@ -79,9 +86,7 @@ function UserForm() {
 							type="text"
 							id="email"
 						/>
-						<div className="invalid-feedback">
-							{errors.email?.message}
-						</div>
+						<div className="invalid-feedback">{errors.email?.message}</div>
 					</div>
 
 					<div className="pt-3 gap-3 row-3 d-flex flex-row w-100">
@@ -95,9 +100,7 @@ function UserForm() {
 								type="text"
 								id="city"
 							/>
-							<div className="invalid-feedback">
-								{errors.userName?.message}
-							</div>
+							<div className="invalid-feedback">{errors.userName?.message}</div>
 						</div>
 
 						<div className="d-flex flex-column w-100">
@@ -110,9 +113,7 @@ function UserForm() {
 								type="password"
 								id="password"
 							/>
-							<div className="invalid-feedback">
-								{errors.password?.message}
-							</div>
+							<div className="invalid-feedback">{errors.password?.message}</div>
 						</div>
 
 						<div className="d-flex flex-column w-100">
@@ -134,9 +135,7 @@ function UserForm() {
 								type="checkbox"
 								id="isReviewer"
 							/>
-							<div className="invalid-feedback">
-								{errors.isReviewer?.message}
-								</div>
+							<div className="invalid-feedback">{errors.isReviewer?.message}</div>
 						</div>
 
 						<div className="d-flex align-items-center">
@@ -149,18 +148,16 @@ function UserForm() {
 								type="checkbox"
 								id="isAdmin"
 							/>
-							<div className="invalid-feedback">
-								{errors.isAdmin?.message}
-							</div>
+							<div className="invalid-feedback">{errors.isAdmin?.message}</div>
 						</div>
 					</div>
 
 					<div className="pt-4 gap-3 row-5 d-flex flex-row w-100  justify-content-end ">
 						<div className="d-flex gap-3 pt-3">
-							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={"/users"}>
+							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={"/users"} onClick={userIdAsString = undefined}>
 								Cancel
 							</Link>
-							<button type="submit" className="btn btn-primary fw-light fs-6">
+							<button type="submit" className="btn btn-primary fw-light fs-6" formNoValidate>
 								Save
 							</button>
 						</div>

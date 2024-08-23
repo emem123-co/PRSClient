@@ -3,7 +3,10 @@ import { User } from "./User";
 
 const url = `${BASE_URL}/users`;
 
-	
+function replacer(key: string, value: any) {
+	if (key === "") return undefined;
+	return value;
+}
 
 
 export const userAPI = {
@@ -34,7 +37,8 @@ export const userAPI = {
 	 put(user: User) {
 		return fetch(`${url}/${user.id}`, {
 		  method: "PUT",
-		  body: JSON.stringify(user),
+		  body: JSON.stringify(user, replacer),
+
 		  headers: {
 			 "Content-Type": "application/json",
 		  },

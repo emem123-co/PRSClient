@@ -48,6 +48,7 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 								{/* <div className="multiply">{requestLine.product?.price * requestLine.quantity}</div> */}
 							</td>
 							<td className="pe-4 pt-2">{requestLine.request?.total}</td>
+							{/* <td>{requestLine.total}</td> */}
 							<td className="pe-4 pt-2">
 								<div className="ps-4 pt-2 d-flex gap-3">
 									<Link className="small" to={`/requests/detail/${requestLine.requestID}/edit/${requestLine.id}`}>
