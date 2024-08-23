@@ -1,7 +1,10 @@
 import { BASE_URL, checkStatus, parseJSON } from "../utility/fetchUtilities";
 import { User } from "./User";
 
-let url = `${BASE_URL}/users`;
+const url = `${BASE_URL}/users`;
+
+	
+
 
 export const userAPI = {
 	list() {
@@ -48,9 +51,19 @@ export const userAPI = {
 		}).then(checkStatus).then(parseJSON);
 			},
 
-	defaultValues(user: User): import("./User").User[] {
-		throw new Error("Function not implemented.");
-	}
+	
 		
-	 };
+	 
 
+  findByAccount(username: string, password: string): Promise<User> {
+    return (
+      fetch(`${url}?username=${username}&password=${password}`)
+        .then(checkStatus)
+        .then(parseJSON)
+        //delete the next three lineswhen using PRS API because it will only return one user not an array with one user
+        .then((users) => {
+          return users[0] ?? undefined;
+        })
+    );
+  },
+};

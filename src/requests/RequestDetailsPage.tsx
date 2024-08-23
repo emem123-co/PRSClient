@@ -1,6 +1,6 @@
 
 import { Link, useNavigate, useParams, } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, MouseEventHandler, EventHandler } from "react";
 import toast from "react-hot-toast";
 import { requestAPI } from "./RequestAPI";
 import { Request } from "./Request";
@@ -48,6 +48,27 @@ function RequestDetailsPage() {
 	};
 
 
+	async function  sendReview() {
+			if (!request) return; 
+			await requestAPI.review(request);
+			navigate(`/requests`);
+			
+	}
+
+	async function  approve() {
+		if (!request) return; 
+		await requestAPI.approve(request);
+		navigate(`/requests`);
+		
+}
+
+
+async function  reject() {
+	if (!request) return; 
+	await requestAPI.reject(request);
+	navigate(`/requests`);
+	
+}
 	return (
 		<>
 			<section>
@@ -55,7 +76,7 @@ function RequestDetailsPage() {
 					<div className="d-flex justify-content-between align-items-center m-0 px-1">
 						<div className="m-0 fw-normal fs-5">Request Details</div>
 						<div className="d-flex gap-3">
-							<button  type="submit" className="btn btn-primary fw-light fs-6" >
+							<button  type="button" className="btn btn-primary fw-light fs-6" onClick={sendReview}>
 								Send for Review
 							</button>
 
@@ -65,11 +86,11 @@ function RequestDetailsPage() {
 						</div>
 
 						<div className="d-flex gap-3">
-							<button type="submit" className="btn btn-success fw-light fs-6">
+							<button type="button" className="btn btn-success fw-light fs-6 " onClick={approve}>
 								Approve
 							</button>
 
-							<button type="submit" className="btn btn-danger fw-light fs-6">
+							<button type="button" className="btn btn-danger fw-light fs-6" onClick={reject}>
 								Reject
 							</button>
 							<Link to="./edit" className="btn btn-outline-primary fw-light fs-6">
@@ -146,7 +167,7 @@ function RequestDetailsPage() {
 				</div>
 			</section>
 		</>
-	);
+	)
 }
 
 export default RequestDetailsPage;

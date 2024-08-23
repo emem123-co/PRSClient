@@ -57,7 +57,36 @@ export const requestAPI = {
 			.then(parseJSON);
 	},
 
-	// defaultValues(request: Request): import("./Request").Request[] {
-	// 	throw new Error("Function not implemented.");
-	// },
+	review(request: Request) {
+		return fetch(`${url}/review/${request.id}`, {
+			method: "PUT",
+			body: JSON.stringify(request),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then(checkStatus)
+	},
+
+	approve(request: Request) {
+		return fetch(`${url}/approve/${request.id}`, {
+			method: "PUT",
+			body: JSON.stringify(request),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then(checkStatus)
+	},
+
+	reject(request: Request) {
+		return fetch(`${url}/reject/${request.id}`, {
+			method: "PUT",
+			body: JSON.stringify(request),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then(checkStatus)
+	},
 };

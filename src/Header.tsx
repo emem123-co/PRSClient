@@ -1,7 +1,18 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "./users/UserContext";
 
 function Header() {
+	const { user, setUser } = useUserContext();
+	const navigate = useNavigate();
+
+	function signout() {
+		localStorage.removeItem("user");
+		setUser(undefined);
+		navigate("/signin");
+	}
+
 	return (
 		<>
 			<div className="">
@@ -28,9 +39,21 @@ function Header() {
 						<p className="m-0 fw-semibold fs-6 px-2">Purchase Request System</p>
 					</div>
 					<div className="px-2">
-						<Link to="" className="btn btn-outline-primary align-content-center">
-							SIGN IN
-						</Link>
+						<details>
+							<summary className="btn btn-tertiary dropdown-toggle d-flex align-items-center">
+								<span
+									style={{ width: "3rem", height: "3rem" }}
+									className="d-flex  bg-primary-subtle fs-5 text-secondary align-items-center justify-content-center rounded-circle me-2"
+								>
+									<span>{Array(user?.firstName[0])}</span>
+									<span>{Array(user?.lastName[0])}</span>
+								</span>
+							</summary>
+							{user && <button className="dropdown-item" onClick={signout}>
+								Sign out
+							</button> }
+							
+						</details>
 					</div>
 				</header>
 			</div>
