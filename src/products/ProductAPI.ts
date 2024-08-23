@@ -22,7 +22,7 @@ export const productAPI = {
 	},
 
 	post(product: Product) {
-		return fetch(`${url}`, {
+		 return fetch(`${url}`, {
 			method: "POST",
 			body: JSON.stringify(product, replacer),
 			headers: {
@@ -42,7 +42,7 @@ export const productAPI = {
 			},
 		})
 			.then(checkStatus)
-			.then(parseJSON);
+			// ./then(parseJSON);
 	},
 
 	insert(product: Product) {
@@ -57,7 +57,4 @@ export const productAPI = {
 			.then(parseJSON);
 	},
 
-	defaultValues(product: Product): import("./Product").Product[] {
-		throw new Error("Function not implemented.");
-	}
-};
+}

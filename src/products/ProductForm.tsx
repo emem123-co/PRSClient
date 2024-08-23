@@ -3,16 +3,39 @@ import "../App";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Product } from "./Product";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { productAPI } from "./ProductAPI";
 import { Vendor } from "../vendors/Vendor";
 import { vendorAPI } from "../vendors/VendorAPI";
 
 function ProductForm() {
+	//load vendors
+	const [vendors, setVendors] = useState<Vendor[]>([]);
+	let { vendorId: vendorIdAsString } = useParams<{ vendorId: string }>();
+	let vendorId = Number(vendorIdAsString);
+	const [busy, setBusy] = useState(false);
+
+	async function loadVendors() {
+		try {
+			setBusy(true);
+			let data = await vendorAPI.list();
+			setVendors(data);
+		} catch (error: any) {
+			toast.error(error.message);
+		} finally {
+			setBusy(false);
+		}
+	}
+
+	useEffect(() => {
+		loadVendors();
+	}, []);
+
+	//product
 	let { productID: productIDAsString } = useParams<{ productID: string }>();
 	let productID = Number(productIDAsString);
-	const [vendors, setVendors] = useState<Vendor[]>([]);
+	const [products, setProducts] = useState<Product[]>([]);
 
 	const navigate = useNavigate();
 
@@ -22,21 +45,23 @@ function ProductForm() {
 		formState: { errors },
 	} = useForm<Product>({
 		defaultValues: async () => {
-			let vendorsData = await vendorAPI.list();
-			setVendors(vendorsData);
+			let productsData = await productAPI.list();
+			setProducts(productsData);
 
 			if (!productID) {
 				let newProduct = new Product({ productID: productID });
 				return Promise.resolve(newProduct);
 			} else {
-				await productAPI.find(productID);
+				return await productAPI.find(productID);
 			}
 		},
 	});
 
-	const save: SubmitHandler<Product> = async (product) => {
+	const saveProduct: SubmitHandler<Product> = async (product) => {
 		try {
 			if (product.isNew) {
+				console.log(product);
+
 				await productAPI.post(product);
 				navigate("/products");
 				toast.success("Success!");
@@ -51,7 +76,7 @@ function ProductForm() {
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
-				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)}>
+				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(saveProduct)}>
 					<div className="d-flex row-1 gap-3 w-100">
 						<div className="d-flex flex-column w-100">
 							<label className="form-label" htmlFor="name">
@@ -63,9 +88,7 @@ function ProductForm() {
 								type="text"
 								id="name"
 							/>
-							<div className="invalid-feedback">
-								{errors.name?.message}
-							</div>
+							<div className="invalid-feedback">{errors.name?.message}</div>
 						</div>
 
 						<div className="d-flex flex-column w-100">
@@ -78,9 +101,7 @@ function ProductForm() {
 								type="text"
 								id="partNbr"
 							/>
-							<div className="invalid-feedback">
-								{errors.partNbr?.message}
-							</div>
+							<div className="invalid-feedback">{errors.partNbr?.message}</div>
 						</div>
 					</div>
 
@@ -95,14 +116,12 @@ function ProductForm() {
 								type="text"
 								id="price"
 							/>
-							<div className="invalid-feedback">
-								{errors.price?.message}
-							</div>
+							<div className="invalid-feedback">{errors.price?.message}</div>
 						</div>
 
 						<div className="d-flex">
 							<div className="d-flex flex-column">
-								<label className="form-label" htmlFor="unit" {...register("unit", { required: "Unit is required." })}>
+								<label className="form-label" htmlFor="unit">
 									Unit
 								</label>
 								<input
@@ -111,16 +130,16 @@ function ProductForm() {
 									type="text"
 									id="unit"
 								/>
-								<div className="invalid-feedback">
-									{errors.unit?.message}
-								</div>
+								<div className="invalid-feedback">{errors.unit?.message}</div>
 							</div>
 
 							<div className="w-50 align-content-end ps-3">
-								<label className="align-content-center" htmlFor="vendorId"></label>
+								<label className="align-content-center form-label" htmlFor="vendorId">
+									Vendor
+								</label>
 								<select
 									id="vendorId"
-									className={`form-select dropdown ${errors.vendorId ? "is-invalid" : ""}`}
+									className={`form-select dropdown ${errors.vendor?.name ? "is-invalid" : ""}`}
 									{...register("vendorId", { required: "Please choose vendor(s)." })}
 								>
 									<option value="">Select vendor...</option>
@@ -130,9 +149,7 @@ function ProductForm() {
 										</option>
 									))}
 								</select>
-								<div className="Please choose vendor(s).">
-									{errors?.vendorId?.message}
-								</div>
+								<div className="invalid-feedback">{errors.vendor?.name?.message}</div>
 							</div>
 						</div>
 					</div>
@@ -159,7 +176,7 @@ function ProductForm() {
 				</form>
 			</div>
 		</>
-	);
+	)
 }
 
 export default ProductForm;

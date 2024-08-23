@@ -1,20 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { productAPI } from "./ProductAPI";
-import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { Product } from "././Product";
+import {  useState } from "react";
 import ProductForm from "./ProductForm";
-import toast from "react-hot-toast";
-import { requestAPI } from "../requests/RequestAPI";
+import { useForm } from "react-hook-form";
+import { Product } from "./Product";
 
 function EditProductPage() {
 	let { productId: productIdAsString } = useParams<{ productId: string }>();
 	let productId = Number(productIdAsString);
-	const navigate = useNavigate();
-	const [product, setProduct] = useState<Product[]> ([]);
-	const [busy, setBusy] = useState(false);
+	const [product, setProduct] = useState<Product[]>([])
 
 	const {
 		formState: {  },
@@ -33,8 +29,6 @@ function EditProductPage() {
 	});
 
 	
-
-
 	return (
 		<>
 			<div>
@@ -56,3 +50,5 @@ function EditProductPage() {
 	);
 }
 export default EditProductPage;
+
+

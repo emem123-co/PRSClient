@@ -12,7 +12,6 @@ import EditVendorPage from "./vendors/EditVendorPage";
 import UserListPage from "./users/UserListPage";
 import CreateUserPage from "./users/CreateUserPage";
 import EditUserPage from "./users/EditUserPage";
-import { Toaster } from "react-hot-toast";
 import ProductListPage from "./products/ProductListPage";
 import CreateProductPage from "./products/CreateProductPage";
 import EditProductPage from "./products/EditProductPage";
@@ -49,7 +48,7 @@ function App() {
 
 							<Route path="/products" element={<ProductListPage />} />
 							<Route path="/products/create" element={<CreateProductPage />} />
-							<Route path="/products/edit/:product.id" element={<EditProductPage />} />
+							<Route path="/products/edit/:productId" element={<EditProductPage />} />
 							{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 							<Route path="/requests" element={<RequestListPage />} />
@@ -58,8 +57,8 @@ function App() {
 							<Route path="/requests/create" element={<CreateRequestPage />} />
 
 							<Route path="/requestlines" element={<RequestListPage />} />
-							{/* <Route path="/requests/detail/:requestId/requestlines/create" element={<CreateRequestLinePage />} /> */}
-							<Route path="/requests/detail/:requestId/edit/:requestLinesId" element={<EditRequestLinePage />} />
+							<Route path="/requests/detail/:requestId/requestlines/create" element={<CreateRequestLinePage />} />
+							<Route path="/requests/detail/:requestId/edit/:requestLineId" element={<EditRequestLinePage />} />
 						</Routes>
 					</section>
 				</main>

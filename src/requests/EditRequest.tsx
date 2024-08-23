@@ -41,9 +41,7 @@ function EditRequest() {
 					<div className="m-0 fw-normal fs-5">Edit Request</div>
 
 					<div className="d-flex gap-3">
-						{/* <button type="submit" className="btn btn-primary fw-light fs-6" onSubmit={handleSubmit(save)}>
-							Send for Review
-						</button> */}
+						
 
 						<Link to={`/requests/detail/${requestId}`} className="btn btn-outline-primary fw-light fs-6">
 							Cancel

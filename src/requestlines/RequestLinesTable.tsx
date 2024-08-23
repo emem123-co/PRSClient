@@ -45,7 +45,7 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 							</td>
 							<td className="pe-4 pt-2">{requestLine.quantity}</td>
 							<td className="pe-4 pt-2">
-								<div className="multiply">{requestLine.product?.price * requestLine.quantity}</div>
+								{/* <div className="multiply">{requestLine.product?.price * requestLine.quantity}</div> */}
 							</td>
 							<td className="pe-4 pt-2">{requestLine.request?.total}</td>
 							<td className="pe-4 pt-2">

@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { Product } from "./Product";
 import { productAPI } from "./ProductAPI";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 function ProductList() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [busy, setBusy] = useState(false);
+	
+	let {productId: productIdAsAString } = useParams<{productId: string}>();
+	let productId = Number(productIdAsAString);
 	
 
 	async function loadProducts() {
@@ -15,10 +18,13 @@ function ProductList() {
 		setProducts(data);
 		setBusy(false);
 	}
-
+	
 	useEffect(() => {
 		loadProducts();
 	}, []);
+
+	
+
 
 	return (
 		<div className="container-fluid bg-white d-flex flex-wrap gap-4">

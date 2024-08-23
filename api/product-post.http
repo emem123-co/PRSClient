@@ -1,0 +1,16 @@
+POST http://localhost:5000/api/products
+Content-Type: application/json
+
+
+
+
+ {
+ 
+    "partNbr": "newproduct",
+    "name": "newProdcut",
+    "price": 100.00,
+    "unit": "Each",
+    "photoPath": null,
+    "vendorId": 0,
+    "vendor": null
+  }

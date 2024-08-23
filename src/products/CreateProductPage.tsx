@@ -21,6 +21,6 @@ function CreateProductPage() {
 				</section>
 			</div>
 		</>
-	);
+	)
 }
 export default CreateProductPage;

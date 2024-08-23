@@ -12,13 +12,14 @@ import RequestLineForm from "./RequestLineForm";
 function EditRequestLinePage() {
 	let { requestLineId: requestLineIdAsString } = useParams<{ requestLineId: string }>();
 	let requestLineId = Number(requestLineIdAsString);
-	const navigate = useNavigate();
 	const [requestLine, setRequestLine] = useState<RequestLine[]>([]);
 
+	// let { requestId: requestIdAsString } = useParams<{ requestId: string }>();
+	// let requestId = Number(requestLineIdAsString);
+	// const [request, setRequest] = useState<Request[]>([]);
+
 	const {
-		register,
-		handleSubmit,
-		formState: { errors },
+		formState: {  },
 	} = useForm<RequestLine>({
 		defaultValues: async () => {
 			let requestLineData = await requestLineAPI.list();
@@ -45,7 +46,7 @@ function EditRequestLinePage() {
 							Send for Review
 						</button> */}
 
-						<Link to={`/requests/detail/${requestID}`} className="btn btn-outline-primary fw-light fs-6">
+						<Link to={`/requests/detail/${requestLine.requestID}`} className="btn btn-outline-primary fw-light fs-6">
 							Cancel
 						</Link>
 					</div>

@@ -59,7 +59,5 @@ export const requestLineAPI = {
 			.then(parseJSON);
 	},
 
-	defaultValues(requestLine: RequestLine): import("./RequestLine").RequestLine[] {
-		throw new Error("Function not implemented.");
-	}
+	
 };
