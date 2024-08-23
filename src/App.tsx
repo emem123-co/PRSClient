@@ -72,12 +72,12 @@ function App() {
 
 								<Route path="/users" element={<UserListPage />} />
 								<Route path="/users/create" element={<CreateUserPage />} />
-								<Route path="/users/edit/:id" element={<EditUserPage />} />
+								<Route path="/users/edit/:userId" element={<EditUserPage />} />
 								{/* <Route path="/users/delete/:id" element={</>} /> */}
 
 								<Route path="/products" element={<ProductListPage />} />
 								<Route path="/products/create" element={<CreateProductPage />} />
-								<Route path="/products/edit/:productId" element={<EditProductPage />} />
+								<Route path="/products/edit/:productID" element={<EditProductPage />} />
 								{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 								<Route path="/requests" element={<RequestListPage />} />

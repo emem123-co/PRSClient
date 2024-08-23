@@ -13,16 +13,12 @@ function EditRequest() {
 	let { requestId: requestIdAsString } = useParams<{ requestId: string }>();
 	let requestId = Number(requestIdAsString);
 	const navigate = useNavigate();
-	const [request, setRequest] = useState<Request[]>([]);
 
 	const {
-		register,
-		handleSubmit,
-		formState: { errors },
+		formState: { },
 	} = useForm<Request>({
 		defaultValues: async () => {
-			let requestData = await requestAPI.list();
-			setRequest(requestData);
+			
 
 			if (!requestId) {
 				let newRequest = new Request(requestId);

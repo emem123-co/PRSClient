@@ -1,7 +1,7 @@
 import { BASE_URL, checkStatus, parseJSON } from "../utility/fetchUtilities";
 import { RequestLine } from "../requestlines/RequestLine";
 
-let url = `${BASE_URL}/requests`;
+let url = `${BASE_URL}/requestlines`;
 
 function replacer(key: string, value: any) {
 	if (key === "vendor") return undefined;

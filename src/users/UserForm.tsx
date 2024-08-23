@@ -1,20 +1,35 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { User } from "./User";
 import { useForm } from "react-hook-form";
 import { userAPI } from "./UserAPI";
 import toast from "react-hot-toast";
 
 function UserForm() {
+
+	let { userId: userIdAsString } = useParams<{ userId: string }>();
+	let userId = Number(userIdAsString);
+	const navigate = useNavigate();
+
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<User>();
+	} = useForm<User>({
+		defaultValues: async () => {
+			
+			if (!userId) {
+				let newUser = new User( userId );
+				return Promise.resolve(newUser);
+			} else {
+				return await userAPI.find(userId);
+			}
+		},
+	});
 
-	const navigate = useNavigate();
-
+	
 	async function save(user: User) {
 		await userAPI.post(user);
 

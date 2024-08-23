@@ -46,37 +46,7 @@ function UserList() {
 								{user.firstName} {user.lastName}
 							</p>
 
-							<div className="dropdown dropdown-menu-end">
-								<button
-									id="dLabel"
-									type="button"
-									data-toggle="dropdown"
-									aria-haspopup="true"
-									aria-expanded="false"
-									className="border-0 bg-white rounded-2 p-0 justify-content-end"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="16"
-										height="16"
-										fill="black"
-										className="bi bi-three-dots-vertical"
-										viewBox="0 0 16 16"
-									>
-										{" "}
-										<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-									</svg>
-								</button>
-
-								<div className="dropdown-menu" aria-labelledby="dLabel">
-									<Link className="dropdown-item" to="./users/edit">
-										edit
-									</Link>
-									<button className="dropdown-item" type="button">
-										delete
-									</button>
-								</div>
-							</div>
+							
 						</section>
 						<div className="d-flex gap-2 py-2">
 							{user.isAdmin && <small className="border border-secondary text-dark rounded-2 p-1 px-2">Admin</small>}
@@ -101,9 +71,10 @@ function UserList() {
 							/>
 						</svg>
 						<span className="ps-1 m-0">{user.phone}</span>
-						{/* <div className="d-flex gap-2">
-						<Link to={`/users/edit/${user.id}`}>edit</Link> | <Link to={`/users/delete/${user.id}`}>delete</Link>
-						</div> */}
+						
+						<div className="d-flex gap-2">
+						<Link className="small" to={`/users/edit/${user.id}`}>edit</Link> | <Link className="small" to={`/users/delete/${user.id}`}>delete</Link>
+						</div>
 					</div>
 				</div>
 			))}

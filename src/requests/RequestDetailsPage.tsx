@@ -93,9 +93,7 @@ async function  reject() {
 							<button type="button" className="btn btn-danger fw-light fs-6" onClick={reject}>
 								Reject
 							</button>
-							<Link to="./edit" className="btn btn-outline-primary fw-light fs-6">
-								Edit
-							</Link>
+							
 						</div>
 					</div>
 				</div>

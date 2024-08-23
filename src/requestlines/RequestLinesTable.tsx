@@ -50,7 +50,7 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 							<td className="pe-4 pt-2">{requestLine.request?.total}</td>
 							<td className="pe-4 pt-2">
 								<div className="ps-4 pt-2 d-flex gap-3">
-									<Link className="small" to={`./edit/${requestLine.id}`}>
+									<Link className="small" to={`/requests/detail/${requestLine.requestID}/edit/${requestLine.id}`}>
 										edit
 									</Link>
 									<a

@@ -35,9 +35,9 @@ function RequestLineForm() {
 	} = useForm<RequestLine>({
 		defaultValues: async () => {
 			let productData = await productAPI.list();
-			let requestData = await requestAPI.find(requestId);
+			// let requestData = await requestAPI.find(requestId);
 			setProducts(productData);
-			setRequest(requestData);
+			// setRequest(requestData);
 
 			if (!requestLineId) {
 				let newRequestLine = new RequestLine({ requestId: requestId });
@@ -112,24 +112,12 @@ function RequestLineForm() {
 							<div className="invalid-feedback">{errors.quantity?.message}</div>
 						</div>
 
-						<div className="d-flex">
-							<label
-								className="align-content-center form-label"
-								htmlFor="requestTotal"
-								id="request.total"
-								className={`form-select dropdown ${errors.request?.total ? "is-invalid" : ""}`}
-								{...register("request.total", { required: "Please choose a product" })}
-							>
-								<div>Total</div>
-								<div>{/* <>{request.total}</> */}</div>
-							</label>
-							<div className="invalid-feedback">{errors.total?.message}</div>
-						</div>
+							
 					</div>
 
 					<div className="pt-4 gap-3 row-5 d-flex flex-row w-100  justify-content-end ">
 						<div className="d-flex gap-3 pt-3">
-							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={"/products"}>
+							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={"/requests/detail"}>
 								Cancel
 							</Link>
 							<button type="submit" className="btn btn-primary fw-light fs-6">
@@ -143,3 +131,6 @@ function RequestLineForm() {
 	);
 }
 export default RequestLineForm;
+
+
+

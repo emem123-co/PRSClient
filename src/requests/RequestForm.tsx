@@ -19,9 +19,7 @@ function RequestForm() {
 		formState: { errors },
 	} = useForm<Request>({
 		defaultValues: async () => {
-			let requestData = await requestAPI.list();
-			setRequest(requestData);
-
+			
 			if (!requestId) {
 				let newRequest = new Request({ requestId: requestId });
 				return Promise.resolve(newRequest);
@@ -120,7 +118,7 @@ function RequestForm() {
 								<div className="d-flex justify-content-end">
 									<div className="py-4 d-flex align-content-end">
 										<button type="submit" className="btn btn-primary fw-light fs-6" onSubmit={handleSubmit(save)}>
-											Send for Review
+											Save
 										</button>
 									</div>
 								</div>

@@ -36,14 +36,19 @@ function SignInPage() {
 
   const signin: SubmitHandler<IAccount> = async (account) => {
     try {
+      if (!account.password ) {
+        toast.error("incorrect password")
+      } else {
+        
+
+      
       const user = await userAPI.findByAccount(
         account.username,
         account.password
       );
       persistUser(user);
       setUser(user);
-
-      navigate("/requests");
+      navigate("/requests");}
     } catch (error: any) {
       toast.error("Unsuccessful sign in. Please try again.");
     }
