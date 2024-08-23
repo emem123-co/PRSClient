@@ -2,8 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
 import { Link } from "react-router-dom";
 import VendorList from "./VendorList";
+import toast from "react-hot-toast";
 
 function VendorListPage() {
+
+	
 	return (
 		<>
 			<div>

@@ -6,13 +6,14 @@
 //if user is not review, add message that says they dont have permission to review requests (or just disable approve/reject buttons)
 
 //if reject button is clicked, add rejection reason
-import { Link, useParams, } from "react-router-dom";
+import { Link, useNavigate, useParams, } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { requestAPI } from "./RequestAPI";
 import { Request } from "./Request";
 import RequestLinesTable from "../requestlines/RequestLinesTable";
 import EditRequest from "./EditRequest";
+import { SubmitHandler } from "react-hook-form";
 
 
 function RequestDetailsPage() {
@@ -20,6 +21,7 @@ function RequestDetailsPage() {
 	const requestId = Number(requestIdAsAString);
 	const [request, setRequest] = useState<Request | undefined>(undefined);
 	const [busy, setBusy] = useState(false);
+	const navigate = useNavigate();
 
 	async function loadRequest() {
 		try {
@@ -38,6 +40,20 @@ function RequestDetailsPage() {
 		loadRequest();
 	}, []);
 
+	const save: SubmitHandler<Request> = async (request) => {
+		try {
+			if (request.isNew) {
+				await requestAPI.post(request);
+				navigate(`/requests`);
+			} else {
+				await requestAPI.put(request);
+				navigate(`/requests`);
+			}
+		} catch (error: any) {
+			toast.error(error.message);
+		}
+	};
+
 
 	return (
 		<>
@@ -46,7 +62,7 @@ function RequestDetailsPage() {
 					<div className="d-flex justify-content-between align-items-center m-0 px-1">
 						<div className="m-0 fw-normal fs-5">Request Details</div>
 						<div className="d-flex gap-3">
-							<button type="submit" className="btn btn-primary fw-light fs-6">
+							<button  type="submit" className="btn btn-primary fw-light fs-6" >
 								Send for Review
 							</button>
 
@@ -141,3 +157,5 @@ function RequestDetailsPage() {
 }
 
 export default RequestDetailsPage;
+
+// onSubmit={handleSubmit(save)}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "./Product";
 import { productAPI } from "./ProductAPI";
+import { Link } from "react-router-dom";
 
 
 function ProductList() {
@@ -35,6 +36,10 @@ function ProductList() {
 						<small className="d-flex justify-content-center rounded-2 text-bg-dark text-white" style={{width: 130}}>
 							{product.partNbr}
 						</small>
+						<span className=" d-flex gap-2">
+						<Link to={`/products/edit/${product.id}`}>edit</Link>|
+						<Link to={`/products/delete/${product.id}`}>delete</Link>
+						</span> 
 					</div>
 					</div>
 				</div>
@@ -45,9 +50,4 @@ function ProductList() {
 }
 export default ProductList;
 
-{
-	/* <span>
-	<Link to={`/products/edit/${product.id}`}>edit</Link> |{" "}
-	<Link to={`/products/delete/${product.id}`}>delete</Link>
-</span> */
-}
+

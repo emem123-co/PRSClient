@@ -31,6 +31,7 @@ export const requestAPI = {
 			},
 		})
 			.then(checkStatus)
+			.then(parseJSON);
 	},
 
 	put(request: Request) {
@@ -56,7 +57,7 @@ export const requestAPI = {
 			.then(parseJSON);
 	},
 
-	defaultValues(request: Request): import("./Request").Request[] {
-		throw new Error("Function not implemented.");
-	},
+	// defaultValues(request: Request): import("./Request").Request[] {
+	// 	throw new Error("Function not implemented.");
+	// },
 };

@@ -1,9 +1,35 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { vendorAPI } from "./VendorAPI";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { Vendor } from "./Vendor";
 import VendorForm from "./VendorForm";
-import { Link } from "react-router-dom";
 
 function EditVendorPage() {
+	let { vendorId: vendorIdAsString } = useParams<{ vendorId: string }>();
+	let vendorId = Number(vendorIdAsString);
+	const navigate = useNavigate();
+	const [vendor, setVendor] = useState<Vendor[]>([]);
+
+	const {
+		formState: {  },
+	} = useForm<Vendor>({
+		defaultValues: async () => {
+			let vendorData = await vendorAPI.list();
+			setVendor(vendorData);
+
+			if (!vendorId) {
+				let newVendor = new Vendor(vendorId);
+				return Promise.resolve(newVendor);
+			} else {
+				return await vendorAPI.find(vendorId);
+			}
+		},
+	});
+
+	
 	return (
 		<>
 			<div>
@@ -16,8 +42,8 @@ function EditVendorPage() {
 					</div>
 					<hr />
 					<div className="pt-2">
-					{/* <VendorForm /> */}
-						{/* copy in vendor form and place value={vendor.prop} attributes on the input tags to populate the current vendor */}
+					<VendorForm />
+						
 					</div>
 				</section>
 			</div>

@@ -8,6 +8,7 @@ export class Vendor {
 	zip = "";
 	phone = "";
 	email = "";
+	filter: any;
 
 	get isNew(): boolean {
 		return this.id === undefined;

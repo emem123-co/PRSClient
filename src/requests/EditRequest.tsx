@@ -33,22 +33,7 @@ function EditRequest() {
 		},
 	});
 
-	const save: SubmitHandler<Request> = async (request) => {
-		try {
-			if (request.isNew) {
-				await requestAPI.post(request);
-				navigate(`/detail/${requestId}`);
-				navigate("./requests")
-				toast.success("Success!");
-
-			} else {
-				await requestAPI.put(request);
-				navigate(`/detail/${requestId}`);
-			}
-		} catch (error: any) {
-			toast.error(error.message);
-		}
-	};
+	
 	return (
 		<>
 			<section className="container-fluid bg-white">

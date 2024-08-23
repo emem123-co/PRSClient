@@ -39,7 +39,7 @@ function App() {
 
 							<Route path="/vendors" element={<VendorListPage />} />
 							<Route path="/vendors/create" element={<CreateVendorPage />} />
-							<Route path="/vendors/edit/:id" element={<EditVendorPage />} />
+							<Route path="/vendors/edit/:vendorId" element={<EditVendorPage />} />
 							<Route path="/vendors/delete/:id" element={<VendorListPage />} />
 
 							<Route path="/users" element={<UserListPage />} />
@@ -56,12 +56,10 @@ function App() {
 							<Route path="/requests/detail/:requestId/edit" element={<EditRequest />} />
 							<Route path="/requests/detail/:requestId" element={<RequestDetailsPage />} />
 							<Route path="/requests/create" element={<CreateRequestPage />} />
-							
 
 							<Route path="/requestlines" element={<RequestListPage />} />
-							<Route path="/requests/detail/:requestId/requestlines/create" element={<CreateRequestLinePage />} />
-							<Route path="/requests/detail/:requestId/edit/:requestLinesId" element={<EditRequestLinePage />} />
-
+							{/* <Route path="/requests/detail/:requestId/requestlines/create" element={<CreateRequestLinePage />} />
+							<Route path="/requests/detail/:requestId/edit/:requestLinesId" element={<EditRequestLinePage />} /> */}
 						</Routes>
 					</section>
 				</main>

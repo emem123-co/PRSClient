@@ -36,7 +36,6 @@ export const userAPI = {
 			 "Content-Type": "application/json",
 		  },
 		}).then(checkStatus)
-		.then(parseJSON);
 	 },
 
 	 insert(user: User) {

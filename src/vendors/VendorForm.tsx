@@ -2,30 +2,53 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Vendor } from "./Vendor";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { vendorAPI } from "./VendorAPI";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 function VendorForm() {
-	const navigate = useNavigate();
 	
+	let { vendorId: vendorIdAsString } = useParams<{ vendorId: string }>();
+	let vendorId = Number(vendorIdAsString);
+	const navigate = useNavigate();
+	const [vendor, setVendor] = useState<Vendor[]>([]);
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<Vendor>({});
+	} = useForm<Vendor>({
+		defaultValues: async () => {
+			let vendorData = await vendorAPI.list();
+			setVendor(vendorData);
 
-	async function save(vendor: Vendor) {
-		await vendorAPI.post(vendor);
+			if (!vendorId) {
+				let newVendor = new Vendor({vendorId: vendorId});
+				return Promise.resolve(newVendor);
+			} else {
+				return await vendorAPI.find(vendorId);
+			}
+		},
+	});
 
-		toast.success("Success!");
-		navigate("/vendors");
-	}
+	const saveVendor: SubmitHandler<Vendor> = async (vendor) => {
+		try {
+			if (vendor.isNew) {
+				await vendorAPI.post(vendor);
+				navigate(`/vendors`);
+			} else {
+				await vendorAPI.put(vendor);
+				navigate(`/vendors`);
+			}
+		} catch (error: any) {
+			toast.error(error.message);
+		}};
 
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
-				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(save)}>
+				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(saveVendor)}>
 					<div className="d-flex w-100 gap-3 ">
 						<div className="row-1 d-flex flex-column w-100">
 
@@ -95,7 +118,7 @@ function VendorForm() {
 							<label
 								className="form-label"
 								htmlFor="state">
-								State
+								State (XX)
 							</label>
 							<input
 								className={`form-control ${errors.state ? "is-invalid" : ""}`}
@@ -110,7 +133,7 @@ function VendorForm() {
 
 						<div className="d-flex flex-column w-100">
 							<label className="form-label" htmlFor="zip">
-								Zip
+								Zip (00000)
 							</label>
 							<input
 								className={`form-control ${errors.zip ? "is-invalid" : ""}`}

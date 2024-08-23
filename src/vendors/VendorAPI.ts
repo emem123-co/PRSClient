@@ -8,10 +8,13 @@ export const vendorAPI = {
 		return fetch(`${url}?_sort=name&_order=asc`).then(checkStatus).then(parseJSON);
 	},
 
-	find(id: number): Promise<Vendor[]>  {
+	find(id: number): Promise<Vendor>  {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
 
+	delete(id: number) {
+		return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
+	},
 
 
 	post(vendor: Vendor): Promise<Vendor> {
@@ -35,7 +38,6 @@ export const vendorAPI = {
 			},
 		})
 			.then(checkStatus)
-			.then(parseJSON);
 	},
 
 	insert(vendor: Vendor) {
@@ -47,7 +49,6 @@ export const vendorAPI = {
 			body: JSON.stringify(vendor),
 		})
 			.then(checkStatus)
-			.then(parseJSON);
 	},
 
 	defaultValues(vendor: Vendor): import("./Vendor").Vendor[] {
