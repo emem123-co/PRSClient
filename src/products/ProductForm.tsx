@@ -11,10 +11,7 @@ import { vendorAPI } from "../vendors/VendorAPI";
 
 function ProductForm() {
 	let { productID: productIDAsString } = useParams<{ productID: string }>();
-	
-	let { vendorId: vendorIdAsString } = useParams<{ vendorId: string }>();
 	let productID = Number(productIDAsString);
-	let vendorId = Number(vendorIdAsString);
 	const [vendors, setVendors] = useState<Vendor[]>([]);
 
 	const navigate = useNavigate();
@@ -32,8 +29,7 @@ function ProductForm() {
 				let newProduct = new Product({ productID: productID });
 				return Promise.resolve(newProduct);
 			} else {
-				 let currentProduct = await productAPI.find(productID);
-				 return currentProduct;
+				await productAPI.find(productID);
 			}
 		},
 	});

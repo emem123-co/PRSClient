@@ -8,9 +8,10 @@ import { Link } from "react-router-dom";
 
 interface RequestLinesTableProps {
 	requestLines: RequestLine[] | undefined;
+	onRemove: (requestLines: RequestLine) => void;
 }
 
-function RequestLinesTable({ requestLines }: RequestLinesTableProps) {
+function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 	// async function remove(requestLine: RequestLine) {
 	// 	if (confirm("Are you sure you want to delete this requestlines?")) {
 	// 		if (requestLine.id) {
@@ -21,7 +22,6 @@ function RequestLinesTable({ requestLines }: RequestLinesTableProps) {
 	// 		}
 	// 	}
 	// }
-
 	return (
 		<>
 			<div className="container container-fluid">
@@ -33,43 +33,47 @@ function RequestLinesTable({ requestLines }: RequestLinesTableProps) {
 							<th className="pe-4">Price</th>
 							<th className="pe-4">Quantity</th>
 							<th className="pe-4">Line Total</th>
-							<th className="pe-4"> </th>
+							<th className="pe-4">Request Total</th>
 						</tr>
 					</thead>
 
 					{requestLines?.map((requestLine) => (
 						<tbody key={requestLine.id}>
-							<td>{requestLine.product?.name}</td>
-							<td>{requestLine.quantity && `$${requestLine.product?.price}/${requestLine.product?.unit}`}</td>
-							<td>{requestLine.quantity}</td>
-							<td>{requestLine.total}</td>
-							<td>
-								<div className="d-flex gap-2">
-									<Link className="small" to={`./create`}>
-										Add an item...
+							<td className="px-4 pt-2">{requestLine.product?.name}</td>
+							<td className="pe-4 pt-2">
+								{requestLine.quantity && `$${requestLine.product?.price}/${requestLine.product?.unit}`}
+							</td>
+							<td className="pe-4 pt-2">{requestLine.quantity}</td>
+							<td className="pe-4 pt-2">
+								<div className="multiply">{requestLine.product?.price * requestLine.quantity}</div>
+							</td>
+							<td className="pe-4 pt-2">{requestLine.request?.total}</td>
+							<td className="pe-4 pt-2">
+								<div className="ps-4 pt-2 d-flex gap-3">
+									<Link className="small" to={`./edit/${requestLine.id}`}>
+										edit
 									</Link>
 									<a
 										className="small"
 										onClick={(event: SyntheticEvent) => {
 											event.preventDefault();
-											remove(requestLine);
+											onRemove(requestLine);
 										}}
 									>
 										delete
 									</a>
-									<Link className="small" to={`./edit/${requestLine.id}`}>
-										edit item
-									</Link>
 								</div>
 							</td>
 						</tbody>
 					))}
-					<div className="d-flex w-100 p-4 justify-content-end">
+				</table>
+				<div className=" justify-content-end">
+					<div className="">
 						<Link type="button" className="btn btn-outline-secondary w-100" to="./requestlines/create">
 							+ Items
 						</Link>
 					</div>
-				</table>
+				</div>
 			</div>
 		</>
 	);

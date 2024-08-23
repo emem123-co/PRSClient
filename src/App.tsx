@@ -20,7 +20,7 @@ import CreateRequestPage from "./requests/CreateRequestPage";
 import RequestListPage from "./requests/RequestListPage";
 import EditRequestPage from "./requests/EditRequest";
 import RequestDetailPage from "./requests/RequestDetailsPage";
-import CreateRequestLinePage from "./requestlines/CreateRequestLinePage copy";
+import CreateRequestLinePage from "./requestlines/CreateRequestLinePage";
 import EditRequestLinePage from "./requestlines/EditRequestLinePage";
 import RequestDetailsPage from "./requests/RequestDetailsPage";
 import EditRequest from "./requests/EditRequest";
@@ -49,7 +49,7 @@ function App() {
 
 							<Route path="/products" element={<ProductListPage />} />
 							<Route path="/products/create" element={<CreateProductPage />} />
-							<Route path="/products/edit/:id" element={<EditProductPage />} />
+							<Route path="/products/edit/:product.id" element={<EditProductPage />} />
 							{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 							<Route path="/requests" element={<RequestListPage />} />
@@ -58,8 +58,8 @@ function App() {
 							<Route path="/requests/create" element={<CreateRequestPage />} />
 
 							<Route path="/requestlines" element={<RequestListPage />} />
-							{/* <Route path="/requests/detail/:requestId/requestlines/create" element={<CreateRequestLinePage />} />
-							<Route path="/requests/detail/:requestId/edit/:requestLinesId" element={<EditRequestLinePage />} /> */}
+							{/* <Route path="/requests/detail/:requestId/requestlines/create" element={<CreateRequestLinePage />} /> */}
+							<Route path="/requests/detail/:requestId/edit/:requestLinesId" element={<EditRequestLinePage />} />
 						</Routes>
 					</section>
 				</main>

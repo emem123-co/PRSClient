@@ -1,5 +1,5 @@
 import { User } from "../users/User";
-import { RequestLine }  from "../requestlines/RequestLine"
+import { RequestLine } from "../requestlines/RequestLine";
 
 export class Request {
 	id: number | undefined;
@@ -7,6 +7,7 @@ export class Request {
 	justification = "";
 	rejectionReasoning = "";
 	deliveryMode = "";
+	total = 0;
 	status = "";
 	userId: number | undefined;
 	user: User | undefined;
@@ -23,6 +24,7 @@ export class Request {
 		if (initializer.justification) this.justification = initializer.justification;
 		if (initializer.rejectionReasoning) this.rejectionReasoning = initializer.rejectionReasoning;
 		if (initializer.deliveryMode) this.deliveryMode = initializer.deliveryMode;
+		if (initializer.total) this.total = initializer.total;
 		if (initializer.status) this.status = initializer.status;
 		if (initializer.userId) this.userId = initializer.userId;
 		if (initializer.user) this.user = initializer.user;

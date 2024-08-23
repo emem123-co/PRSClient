@@ -13,7 +13,7 @@ export const productAPI = {
 		return fetch(`${url}?_sort=name&_order=asc`).then(checkStatus).then(parseJSON);
 	},
 
-	find(id: number): Promise<Product[]> {
+	find(id: number): Promise<Product> {
 		return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
 	},
 

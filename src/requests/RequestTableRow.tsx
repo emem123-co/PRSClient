@@ -19,7 +19,7 @@ function RequestTableRow({ request, onRemove }: RequestTableRowProps) {
       <td>{request.status}</td>
       <td>{request.total && "$"}{request.total}</td>
       <td>
-        {request.user?.firstName}{request.user?.lastName}
+        {request.user?.firstName}{"  "}{request.user?.lastName}
       </td>
       <td>
         <div className="d-flex gap-2">

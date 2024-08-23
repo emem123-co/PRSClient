@@ -37,7 +37,7 @@ function ProductList() {
 							{product.partNbr}
 						</small>
 						<span className=" d-flex gap-2">
-						<Link to={`/products/edit/${product.id}`}>edit</Link>|
+						<Link to={`./edit/${product.id}`}>edit</Link>|
 						<Link to={`/products/delete/${product.id}`}>delete</Link>
 						</span> 
 					</div>
