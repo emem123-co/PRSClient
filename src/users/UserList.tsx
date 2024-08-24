@@ -1,24 +1,38 @@
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { User } from "./User";
 import { userAPI } from "./UserAPI";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
-function UserList() {
+interface UserListProps {
+	user: User;
+	onRemove: (user: User) => void;
+}
+
+function UserList({ user, onRemove }: UserListProps) {
 	const [users, setUsers] = useState<User[]>([]);
 	const [busy, setBusy] = useState(false);
 
 	async function loadUsers() {
-		setBusy(true);
-		let data = await userAPI.list();
-		setUsers(data);
-		setBusy(false);
+		try {
+			setBusy(true);
+			let data = await userAPI.list();
+			setUsers(data);
+			setBusy(false);
+		} catch (error: any) {
+			toast.error(error.message);
+		} finally {
+			setBusy(false);
+		}
 	}
 
 	useEffect(() => {
 		loadUsers();
 	}, []);
+
+	
 
 	return (
 		<section className=" container-fluid bg-white d-flex flex-wrap gap-4 align-content-center">
@@ -29,7 +43,7 @@ function UserList() {
 					</div>
 				</div>
 			)}
-
+{user.userName}
 			{users.map((user) => (
 				<div className="d-flex p-3 gap-4 align-items-center" style={{ width: "25rem" }} key={user.id}>
 					<div
@@ -45,8 +59,6 @@ function UserList() {
 							<p className="m-0 fs-5 fw-semibold" style={{ width: 180 }}>
 								{user.firstName} {user.lastName}
 							</p>
-
-							
 						</section>
 						<div className="d-flex gap-2 py-2">
 							{user.isAdmin && <small className="border border-secondary text-dark rounded-2 p-1 px-2">Admin</small>}
@@ -71,9 +83,24 @@ function UserList() {
 							/>
 						</svg>
 						<span className="ps-1 m-0">{user.phone}</span>
-						
+
 						<div className="d-flex gap-2">
-						<Link className="small" to={`/users/edit/${user.id}`}>edit</Link> | <Link className="small" to={`/users/delete/${user.id}`}>delete</Link>
+							<Link
+								className="small"
+								to={`./edit/${user.id}`}
+								
+							>
+								edit
+							</Link>{" "}
+							|{" "}
+							<a className="small"
+								
+								onClick={(event: SyntheticEvent) => {
+									event.preventDefault();
+									onRemove(user);
+								}}>
+								delete
+							</a>
 						</div>
 					</div>
 				</div>

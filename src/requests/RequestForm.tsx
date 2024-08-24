@@ -33,9 +33,11 @@ function RequestForm() {
 		try {
 			if (request.isNew) {
 				await requestAPI.post(request);
+				toast.success("Success!");
 				navigate(`/requests`);
 			} else {
 				await requestAPI.put(request);
+				toast.success("Success!");
 				navigate(`/requests`);
 			}
 		} catch (error: any) {

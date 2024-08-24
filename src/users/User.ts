@@ -6,8 +6,8 @@ export class User {
 	password = "";
 	phone = "";
 	email = "";
-	isReviewer = "";
-	isAdmin = "";
+	isReviewer = "false";
+	isAdmin = "false";
 
 	get isNew(): boolean {
 		return this.id === undefined;

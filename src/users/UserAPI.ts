@@ -37,12 +37,14 @@ export const userAPI = {
 	 put(user: User) {
 		return fetch(`${url}/${user.id}`, {
 		  method: "PUT",
-		  body: JSON.stringify(user, replacer),
-
+		  body: JSON.stringify(user),
 		  headers: {
 			 "Content-Type": "application/json",
 		  },
-		}).then(checkStatus)
+		})
+			.then(checkStatus)
+			// .then(parseJSON);
+
 	 },
 
 	 insert(user: User) {

@@ -28,17 +28,13 @@ function UserForm() {
 
 	const save: SubmitHandler<User> = async (user) => {
 		try {
-			if (user) {
+			if (user.isNew) {
 				await userAPI.post(user);
-
-				toast.success("Success!");
-				navigate("/users");
 			} else {
 				await userAPI.put(user);
-
-				toast.success("Update successful!");
-				navigate("/users");
 			}
+			toast.success("Success!");
+			navigate("/users");
 		} catch (error: any) {
 			toast.error(error.message);
 		}
@@ -154,7 +150,11 @@ function UserForm() {
 
 					<div className="pt-4 gap-3 row-5 d-flex flex-row w-100  justify-content-end ">
 						<div className="d-flex gap-3 pt-3">
-							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={"/users"} onClick={userIdAsString = undefined}>
+							<Link
+								className="btn btn-outline-secondary fw-light fs-6 border"
+								to={"/users"}
+								onClick={(userIdAsString = undefined)}
+							>
 								Cancel
 							</Link>
 							<button type="submit" className="btn btn-primary fw-light fs-6" formNoValidate>
