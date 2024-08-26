@@ -87,16 +87,16 @@ function UserForm() {
 
 					<div className="pt-3 gap-3 row-3 d-flex flex-row w-100">
 						<div className="d-flex flex-column w-100">
-							<label className="form-label" htmlFor="userName">
+							<label className="form-label" htmlFor="username">
 								Username
 							</label>
 							<input
-								className={`form-control ${errors.userName ? "is-invalid" : ""}`}
-								{...register("userName", { required: "Username is required." })}
+								className={`form-control ${errors.username ? "is-invalid" : ""}`}
+								{...register("username", { required: "Username is required." })}
 								type="text"
 								id="city"
 							/>
-							<div className="invalid-feedback">{errors.userName?.message}</div>
+							<div className="invalid-feedback">{errors.username?.message}</div>
 						</div>
 
 						<div className="d-flex flex-column w-100">

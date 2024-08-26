@@ -2,7 +2,7 @@ export class User {
 	id: number | undefined = undefined;
 	firstName = "";
 	lastName = "";
-	userName = "";
+	username = "";
 	password = "";
 	phone = "";
 	email = "";
@@ -16,13 +16,13 @@ export class User {
 	constructor(initializer?: any) {
 		if (!initializer) return;
 		if (initializer.id) this.id = initializer.id;
-		if (initializer.address) this.firstName = initializer.firstName;
-		if (initializer.city) this.lastName = initializer.lastName;
-		if (initializer.code) this.userName = initializer.userName;
-		if (initializer.name) this.password = initializer.password;
-		if (initializer.state) this.phone = initializer.phone;
-		if (initializer.zip) this.email = initializer.email;
-		if (initializer.phone) this.isReviewer = initializer.isReviewer;
-		if (initializer.email) this.isAdmin = initializer.isAdmin;
+		if (initializer.firstName) this.firstName = initializer.firstName;
+		if (initializer.lastName) this.lastName = initializer.lastName;
+		if (initializer.username) this.username = initializer.username;
+		if (initializer.password) this.password = initializer.password;
+		if (initializer.phone) this.phone = initializer.phone;
+		if (initializer.email) this.email = initializer.email;
+		if (initializer.isReviewer) this.isReviewer = initializer.isReviewer;
+		if (initializer.isAdmin) this.isAdmin = initializer.isAdmin;
 	}
 }

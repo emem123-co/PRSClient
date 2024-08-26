@@ -3,17 +3,16 @@
 //includes Add RequestLine Item button
 import { SyntheticEvent, useEffect, useState } from "react";
 import { RequestLine } from "./RequestLine";
-
+import { Request } from "../requests/Request";
 import { Link } from "react-router-dom";
 import { Product } from "../products/Product";
 
 interface RequestLinesTableProps {
-	request: Request[] | undefined;
+	requestLines: RequestLine[] | undefined;
 	onRemove: (requestLines: RequestLine) => void;
 }
 
 function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
-	
 	return (
 		<>
 			<div className="container container-fluid">
@@ -25,7 +24,7 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 							<th className="pe-3">Price</th>
 							<th className="pe-3">Quantity</th>
 							<th className="pe-3">Line Total</th>
-							<th className="pe-3">Total</th>
+							{/* <th className="pe-3">Total</th> */}
 						</tr>
 					</thead>
 
@@ -37,7 +36,7 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 							</td>
 							<td className="pe-4 pt-2">{requestLine.quantity}</td>
 							<td className="pe-4 pt-2">${(requestLine.product.price ?? 0) * (requestLine.quantity ?? 0)}</td>
-							<td className="pe-4 pt-2">{requestLine.request?.total}</td>
+
 							<td className="pe-4 pt-2">
 								<div className="ps-4 pt-2 d-flex gap-3">
 									<Link className="small" to={`/requests/detail/${requestLine.requestID}/edit/${requestLine.id}`}>
@@ -52,9 +51,14 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 									>
 										delete
 									</a>
+									<td className="pe-4 pt-2">{requestLine?.request?.total}</td>
 								</div>
 							</td>
-							{/* <td>${requestLine.request.total}</td> */}
+							{/* <td>
+								<div className="pt-2 w-100">
+									<div className=" fw-normal">${requestLine.request?.total}</div>
+								</div>
+							</td> */}
 						</tbody>
 					))}
 				</table>

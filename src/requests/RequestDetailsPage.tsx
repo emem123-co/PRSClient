@@ -15,6 +15,15 @@ function RequestDetailsPage() {
 	const [busy, setBusy] = useState(false);
 	const navigate = useNavigate();
 
+	async function getRequestId() {
+		let currentRequest = await requestAPI.find(requestId);
+		setRequest(currentRequest);
+	}
+
+	useEffect(() => {
+		getRequestId();
+	}, []);
+
 	async function loadRequest() {
 		try {
 			if (!requestId) return;
@@ -28,9 +37,6 @@ function RequestDetailsPage() {
 		}
 	}
 
-	
-	
-	
 	async function removeRequestLine(requestLine: RequestLine) {
 		if (confirm("Are you sure you want to delete this line item?")) {
 			if (requestLine.id) {
@@ -38,8 +44,7 @@ function RequestDetailsPage() {
 				toast.success("Successfully deleted.");
 				let updatedRequestLines = request?.requestlines?.filter((rl) => rl.id !== requestLine.id);
 				if (request) {
-					
-					setRequest({...request, requestlines: updatedRequestLines} as Request);
+					setRequest({ ...request, requestlines: updatedRequestLines } as Request);
 				}
 			}
 			navigate(`/requests/detail/${requestId}`);
@@ -50,22 +55,36 @@ function RequestDetailsPage() {
 	}, []);
 
 	async function sendReview() {
-		if (!request) return;
-		await requestAPI.review(request);
-		navigate(`/requests`);
+		try {
+			if (!request) return;
+			await requestAPI.review(request);
+			navigate(`/requests`);
+		} catch (error: any) {
+			toast.error(error.message);
+		}
 	}
 
 	async function approve() {
-		if (!request) return;
-		await requestAPI.approve(request);
-		navigate(`/requests`);
+		try {
+			if (!request) return;
+			await requestAPI.approve(request);
+			navigate(`/requests`);
+		} catch (error: any) {
+			toast.error(error.message);
+		}
 	}
 
 	async function reject() {
-		if (!request) return;
-		await requestAPI.reject(request);
-		navigate(`/requests`);
+		try {
+			if (!request) return;
+			await requestAPI.reject(request);
+			navigate(`/requests`);
+		} catch (error: any) {
+			toast.error(error.message);
+		}
 	}
+	if (!request) return null;
+
 	return (
 		<>
 			<section>
@@ -140,14 +159,14 @@ function RequestDetailsPage() {
 												</small>
 											</div>
 
-											<div className="pt-2 w-100">
+											{/* <div className="pt-2 w-100">
 												<div
 													className="fw-bold border border-2 rounded-2 border-primary px-2 py-1 d-flex flex-column align-items-center justify-content-end w-100"
 													style={{ width: "6rem" }}
 												>
 													Total<div className=" fw-normal">${request?.total}</div>
 												</div>
-											</div>
+											</div> */}
 										</div>
 									</div>
 								</div>

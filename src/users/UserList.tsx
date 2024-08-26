@@ -43,7 +43,7 @@ function UserList({ user, onRemove }: UserListProps) {
 					</div>
 				</div>
 			)}
-{user.userName}
+{user.username}
 			{users.map((user) => (
 				<div className="d-flex p-3 gap-4 align-items-center" style={{ width: "25rem" }} key={user.id}>
 					<div
