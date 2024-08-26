@@ -52,9 +52,12 @@ function RequestLineForm() {
 		try {
 			if (requestLine.isNew) {
 				await requestLineAPI.post(requestLine);
+				toast.success("Success!");
 				navigate(`requests/detail/${requestId}`);
 			} else {
 				await requestLineAPI.put(requestLine);
+				toast.success("Success!");
+				navigate(`requests/detail/${requestId}`);
 			}
 		} catch (error: any) {
 			toast.error(error.message);
@@ -63,9 +66,11 @@ function RequestLineForm() {
 	return (
 		<>
 			<div className="d-flex fw-normal fs-6">
-				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(saveRequestLine)}>
+				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(saveRequestLine)} noValidate>
 					<div className="d-flex row-1 gap-3 w-100">
 						<div className="d-flex flex-column w-100">
+							<label className="justify-items-end">{requestId}</label>
+							<input type="number" value={requestId}/>
 							<label className="align-content-center form-label" htmlFor="productID">
 								Product
 							</label>
@@ -111,13 +116,11 @@ function RequestLineForm() {
 							/>
 							<div className="invalid-feedback">{errors.quantity?.message}</div>
 						</div>
-
-							
 					</div>
 
 					<div className="pt-4 gap-3 row-5 d-flex flex-row w-100  justify-content-end ">
 						<div className="d-flex gap-3 pt-3">
-							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={"/requests/"}>
+							<Link className="btn btn-outline-secondary fw-light fs-6 border" to={`/requests/detail/${requestId}`}>
 								Cancel
 							</Link>
 							<button type="submit" className="btn btn-primary fw-light fs-6">
@@ -131,6 +134,3 @@ function RequestLineForm() {
 	);
 }
 export default RequestLineForm;
-
-
-

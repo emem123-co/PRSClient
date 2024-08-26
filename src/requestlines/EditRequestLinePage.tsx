@@ -46,9 +46,7 @@ function EditRequestLinePage() {
 							Send for Review
 						</button> */}
 
-						<Link to={`/requests/detail/${requestLine.requestID}`} className="btn btn-outline-primary fw-light fs-6">
-							Cancel
-						</Link>
+						
 					</div>
 				</div>
 				<hr />
