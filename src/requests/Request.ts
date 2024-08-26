@@ -8,7 +8,7 @@ export class Request {
 	rejectionReasoning = "";
 	deliveryMode = "";
 	total = 0;
-	status = "";
+	status = "NEW";
 	userId: number | undefined;
 	user: User | undefined;
 	requestlines: RequestLine[] | undefined;

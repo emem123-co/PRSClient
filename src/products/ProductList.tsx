@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { Product } from "./Product";
 import { productAPI } from "./ProductAPI";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import ProductCard from "./ProductCard";
+
 
 
 function ProductList() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [busy, setBusy] = useState(false);
+	const navigate = useNavigate();
 	
-	let {productId: productIdAsAString } = useParams<{productId: string}>();
-	let productId = Number(productIdAsAString);
+
+
 	
 
 	async function loadProducts() {
@@ -24,34 +28,42 @@ function ProductList() {
 	}, []);
 
 	
+	async function removeProduct(product: Product) {
+		if (confirm("Are you sure you want to delete this product?")) {
+			if (product.id) {
+				await productAPI.delete(product.id);
+				let updatedProducts = products.filter((p) => p.id !== product.id);
+				setProducts(updatedProducts);
+				toast.success("Successfully deleted.");
+				navigate("/products");
+			}
+		}
+	}
+
+	
 
 
 	return (
-		<div className="container-fluid bg-white d-flex flex-wrap gap-4">
-			{products.map((product) => (
-				<div className="card p-2" key={product.id}>
-					<div className="d-flex flex-column">
-
-					<strong>{product.name}</strong>
-					<span>
-						{product.price} / {product.unit}
-					</span>
-
-					<div className="d-flex flex-column p-0 m-0 gap-1">
-						<small>{product.vendor?.name}</small> 
-						<small className="d-flex justify-content-center rounded-2 text-bg-dark text-white" style={{width: 130}}>
-							{product.partNbr}
-						</small>
-						<span className=" d-flex gap-2">
-						<Link to={`./edit/${product.id}`}>edit</Link>|
-						<Link to={`/products/delete/${product.id}`}>delete</Link>
-						</span> 
+		<section>
+			<div>
+				{busy && (
+					<div className="d-flex justify-content-center align-items-center w-100 vh-100">
+						<div className="spinner-border" role="status">
+							<span className="visually-hidden">Loading...</span>
+						</div>
 					</div>
-					</div>
+				)}
+			</div>
+			<div className="container-fluid bg-white d-flex flex-wrap">
+				<div className="card-group">
+					{products.map((product) => (
+						<div className="py-3">
+							<ProductCard key={product.id} product={product} onRemove={removeProduct}/>
+							</div>
+					))}
 				</div>
-			))}
-			;
-		</div>
+			</div>
+		</section>
 	);
 }
 export default ProductList;

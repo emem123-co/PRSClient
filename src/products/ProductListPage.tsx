@@ -1,9 +1,31 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ProductList from "./ProductList";
+import { Product } from "./Product";
+import { useEffect, useState } from "react";
+import { productAPI } from "./ProductAPI";
+import toast from "react-hot-toast";
 
 function ProductListPage() {
+	// const [product, setProducts] = useState<Product[]>([]);
+	// const [busy, setBusy] = useState(false);
+
+	// let { productId: productIdAsAString } = useParams<{ productId: string }>();
+	// let productId = Number(productIdAsAString);
+
+
+	// async function loadProducts() {
+	// 	setBusy(true);
+	// 	let data = await productAPI.list();
+	// 	setProducts(data);
+	// 	setBusy(false);
+	// }
+
+	// useEffect(() => {
+	// 	loadProducts();
+	// }, []);
+
 	return (
 		<>
 			<div>
@@ -16,10 +38,10 @@ function ProductListPage() {
 						</Link>
 					</div>
 					<hr />
-					<div className="pt-2">
-						<ProductList />
-					</div>
 				</section>
+				<div className="pt-2">
+					<ProductList />
+				</div>
 			</div>
 		</>
 	);

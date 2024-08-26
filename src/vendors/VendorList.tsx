@@ -25,10 +25,10 @@ function VendorList() {
 		if (confirm("Are you sure you want to delete this vendor?")) {
 			if (vendor.id) {
 				await vendorAPI.delete(vendor.id);
-				let updatedRequests = vendor.filter((v: { id: number | undefined }) => v.id !== vendor.id);
-				setVendors(updatedRequests);
+				let updatedVendors = vendors.filter((v: { id: number | undefined }) => v.id !== vendor.id);
+				setVendors(updatedVendors);
 				toast.success("Successfully deleted.");
-				navigate("./vendors");
+				navigate("/vendors");
 			}
 		}
 	}

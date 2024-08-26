@@ -159,14 +159,14 @@ function RequestDetailsPage() {
 												</small>
 											</div>
 
-											{/* <div className="pt-2 w-100">
+											<div className="pt-2 w-100">
 												<div
 													className="fw-bold border border-2 rounded-2 border-primary px-2 py-1 d-flex flex-column align-items-center justify-content-end w-100"
 													style={{ width: "6rem" }}
 												>
 													Total<div className=" fw-normal">${request?.total}</div>
 												</div>
-											</div> */}
+											</div>
 										</div>
 									</div>
 								</div>
