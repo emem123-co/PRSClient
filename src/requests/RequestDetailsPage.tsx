@@ -1,16 +1,17 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect, MouseEventHandler, EventHandler } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { requestAPI } from "./RequestAPI";
 import { Request } from "./Request";
 import RequestLinesTable from "../requestlines/RequestLinesTable";
-import EditRequest from "./EditRequest";
-import { SubmitHandler } from "react-hook-form";
+import { RequestLine } from "../requestlines/RequestLine";
+import { requestLineAPI } from "../requestlines/RequestLineAPI";
 
 function RequestDetailsPage() {
 	let { requestId: requestIdAsAString } = useParams<{ requestId: string }>();
 	const requestId = Number(requestIdAsAString);
 	const [request, setRequest] = useState<Request | undefined>(undefined);
+	const [requestLines, setRequestLines] = useState<RequestLine | undefined>(undefined);
 	const [busy, setBusy] = useState(false);
 	const navigate = useNavigate();
 
@@ -31,19 +32,31 @@ function RequestDetailsPage() {
 		loadRequest();
 	}, []);
 
-	const save: SubmitHandler<Request> = async (request) => {
-		try {
-			if (request.isNew) {
-				await requestAPI.post(request);
-				navigate(`/requests`);
-			} else {
-				await requestAPI.put(request);
-				navigate(`/requests`);
-			}
-		} catch (error: any) {
-			toast.error(error.message);
+	// const save: SubmitHandler<Request> = async (request) => {
+	// 	try {
+	// 		if (request.isNew) {
+	// 			await requestAPI.post(request);
+	// 			navigate(`/requests`);
+	// 		} else {
+	// 			await requestAPI.put(request);
+	// 			navigate(`/requests`);
+	// 		}
+	// 	} catch (error: any) {
+	// 		toast.error(error.message);
+	// 	}
+	// };
+
+	async function remove(requestLine: RequestLine) {
+		if (confirm("Are you sure you want to delete this line item?")) {
+		  if (requestLine.id) {
+			 await requestLineAPI.delete(requestLine.id);
+			 let updatedRequestLines = requestLine.find((r) => r.id !== requestLine.id);
+			 setRequestLines(updatedRequestLines);
+			 toast.success("Successfully deleted.");
+		  }
+
 		}
-	};
+	 }
 
 	async function sendReview() {
 		if (!request) return;
@@ -145,7 +158,7 @@ function RequestDetailsPage() {
 									</div>
 								</div>
 							)}
-							<RequestLinesTable requestLines={request?.requestlines} />
+							<RequestLinesTable requestLines={request?.requestlines} onRemove={remove} />
 						</div>
 					</div>
 				</div>
@@ -156,4 +169,3 @@ function RequestDetailsPage() {
 
 export default RequestDetailsPage;
 
-// onSubmit={handleSubmit(save)}

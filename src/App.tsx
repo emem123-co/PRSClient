@@ -17,8 +17,6 @@ import CreateProductPage from "./products/CreateProductPage";
 import EditProductPage from "./products/EditProductPage";
 import CreateRequestPage from "./requests/CreateRequestPage";
 import RequestListPage from "./requests/RequestListPage";
-import EditRequestPage from "./requests/EditRequest";
-import RequestDetailPage from "./requests/RequestDetailsPage";
 import CreateRequestLinePage from "./requestlines/CreateRequestLinePage";
 import EditRequestLinePage from "./requestlines/EditRequestLinePage";
 import RequestDetailsPage from "./requests/RequestDetailsPage";
@@ -32,16 +30,17 @@ import SignInPage from "./useraccount/SignInPage";
 function getPersistedUser() {
 	const userAsJSON = localStorage.getItem("user");
 	if (!userAsJSON) return undefined;
-	const user = JSON.parse(userAsJSON);
-	return user;
-}
+	
+		const user = JSON.parse(userAsJSON);
+		return user;
+	}
+
 
 function App() {
 	const [user, setUser] = useState<User | undefined>(getPersistedUser());
 	return (
 		<BrowserRouter>
 			<UserContext.Provider value={{ user, setUser }}>
-				<>
 					<Header />
 					<main className="d-flex">
 						<Toaster
@@ -73,12 +72,10 @@ function App() {
 								<Route path="/users" element={<UserListPage />} />
 								<Route path="/users/create" element={<CreateUserPage />} />
 								<Route path="/users/edit/:userId" element={<EditUserPage />} />
-								{/* <Route path="/users/delete/:id" element={</>} /> */}
 
 								<Route path="/products" element={<ProductListPage />} />
 								<Route path="/products/create" element={<CreateProductPage />} />
 								<Route path="/products/edit/:productID" element={<EditProductPage />} />
-								{/* <Route path="/products/delete/:id" element={</>} /> */}
 
 								<Route path="/requests" element={<RequestListPage />} />
 								<Route path="/requests/detail/:requestId/edit" element={<EditRequest />} />
@@ -91,7 +88,6 @@ function App() {
 							</Routes>
 						</section>
 					</main>
-				</>
 			</UserContext.Provider>
 		</BrowserRouter>
 	);

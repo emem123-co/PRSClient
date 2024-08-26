@@ -63,11 +63,11 @@ function ProductForm() {
 				console.log(product);
 
 				await productAPI.post(product);
-				navigate("/products");
-				toast.success("Success!");
 			} else {
 				await productAPI.put(product);
 			}
+			navigate("/products");
+			toast.success("Success!");
 		} catch (error: any) {
 			toast.error(error.message);
 		}

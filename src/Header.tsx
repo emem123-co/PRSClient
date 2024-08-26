@@ -1,7 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "./users/UserContext";
+import { getJSON } from "jquery";
+import { parseJSON } from "./utility/fetchUtilities";
 
 function Header() {
 	const { user, setUser } = useUserContext();
@@ -18,7 +20,7 @@ function Header() {
 			<div className="">
 				<header className="d-flex bg-secondary-subtle p-3 justify-content-between align-items-center border-bottom border-20 border-dark-subtle">
 					<div className="d-flex align-items-center">
-						<div className="">
+						<NavLink to="/">
 							<svg
 								id="logo-35"
 								width={40}
@@ -35,25 +37,42 @@ function Header() {
 									fill="#312ECB"
 								/>
 							</svg>
-						</div>
+						</NavLink>
 						<p className="m-0 fw-semibold fs-6 px-2">Purchase Request System</p>
 					</div>
 					<div className="px-2">
-						<details>
-							<summary className="btn btn-tertiary dropdown-toggle d-flex align-items-center">
-								<span
-									style={{ width: "3rem", height: "3rem" }}
-									className="d-flex  bg-primary-subtle fs-5 text-secondary align-items-center justify-content-center rounded-circle me-2"
-								>
-									<span>{Array(user?.firstName[0])}</span>
-									<span>{Array(user?.lastName[0])}</span>
-								</span>
-							</summary>
-							{user && <button className="dropdown-item" onClick={signout}>
-								Sign out
-							</button> }
+						
 							
-						</details>
+						
+							<details className="dropdown pe-4 justify-content-">
+								<summary className="btn dropdown-toggle d-flex align-items-center">
+									<span
+										style={{ width: "3rem", height: "3rem" }}
+										className="d-flex  bg-primary fs-5 text-white align-items-center justify-content-center rounded-circle me-2"
+									>
+										<span>{Array(user?.firstName[0])}</span>
+										<span>{Array(user?.lastName[0])}</span>
+									</span>
+								</summary>
+								<div className="justify-content-start">
+									<ul className=" 
+									dropdown-menu bg-secondary-subtle d-flex flex-column " >
+										<li >
+											<a className="dropdown-item">Profile</a>
+										</li>
+										<li >
+											<a className="dropdown-item">Settings</a>
+										</li>
+										<li className="">
+												<button className="dropdown-item" onClick={signout}>
+												Sign out
+											</button>
+										</li>
+									
+									</ul>
+									</div>
+							</details>
+						
 					</div>
 				</header>
 			</div>

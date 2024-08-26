@@ -1,13 +1,13 @@
 export class User {
-	id: number | undefined;
+	id: number | undefined = undefined;
 	firstName = "";
 	lastName = "";
 	userName = "";
 	password = "";
 	phone = "";
 	email = "";
-	isReviewer = "false";
-	isAdmin = "false";
+	isReviewer = false;
+	isAdmin = false;
 
 	get isNew(): boolean {
 		return this.id === undefined;

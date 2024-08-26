@@ -3,6 +3,7 @@ import { Product } from "../products/Product";
 import { Request } from "../requests/Request";
 
 export class RequestLine {
+	[x: string]: any;
   
 	
 	id: number | undefined;
