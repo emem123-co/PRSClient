@@ -8,7 +8,6 @@ function replacer(key: string, value: any) {
 	return value;
 }
 
-
 export const userAPI = {
 	list() {
 		return fetch(`${url}?_sort=name&_order=asc`).then(checkStatus).then(parseJSON);
@@ -24,48 +23,40 @@ export const userAPI = {
 
 	post(user: User) {
 		return fetch(`${url}`, {
-		  method: "POST",
-		  body: JSON.stringify(user),
-		  headers: {
-			 "Content-Type": "application/json",
-		  },
-		})
-		  .then(checkStatus)
-		  .then(parseJSON);
-	 },
-  
-	 put(user: User) {
-		return fetch(`${url}/${user.id}`, {
-		  method: "PUT",
-		  body: JSON.stringify(user),
-		  headers: {
-			 "Content-Type": "application/json",
-		  },
+			method: "POST",
+			body: JSON.stringify(user),
+			headers: {
+				"Content-Type": "application/json",
+			},
 		})
 			.then(checkStatus)
-			// .then(parseJSON);
+			.then(parseJSON);
+	},
 
-	 },
+	put(user: User) {
+		return fetch(`${url}/${user.id}`, {
+			method: "PUT",
+			body: JSON.stringify(user),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}).then(checkStatus);
+		// .then(parseJSON);
+	},
 
-	 insert(user: User) {
+	insert(user: User) {
 		fetch(url, {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(user)
-		}).then(checkStatus).then(parseJSON);
-			},
+			body: JSON.stringify(user),
+		})
+			.then(checkStatus)
+			.then(parseJSON);
+	},
 
-	
-		
-	 
-
-  findByAccount(username: string, password: string): Promise<User> {
-    return (
-      fetch(`${url}/${username}/${password}`)
-        .then(checkStatus)
-        .then(parseJSON)
-    );
-  },
+	findByAccount(username: string, password: string): Promise<User> {
+		return fetch(`${url}/${username}/${password}`).then(checkStatus).then(parseJSON);
+	},
 };

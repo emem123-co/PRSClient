@@ -13,7 +13,6 @@ import { RequestLine } from "../requestlines/RequestLine";
 import { requestLineAPI } from "../requestlines/RequestLineAPI";
 import { Product } from "../products/Product";
 import { productAPI } from "../products/ProductAPI";
-import { requestAPI } from "../requests/RequestAPI";
 
 function RequestLineForm() {
 	const navigate = useNavigate();
@@ -40,7 +39,7 @@ function RequestLineForm() {
 			// setRequest(requestData);
 
 			if (!requestLineId) {
-				let newRequestLine = new RequestLine({ requestId: requestId });
+				let newRequestLine = new RequestLine({ requestID: requestId });
 				return await Promise.resolve(newRequestLine);
 			} else {
 				return await requestLineAPI.find(requestLineId);
@@ -53,11 +52,11 @@ function RequestLineForm() {
 			if (requestLine.isNew) {
 				await requestLineAPI.post(requestLine);
 				toast.success("Success!");
-				navigate(`requests/detail/${requestId}`);
+				navigate(`/requests/detail/${requestId}`);
 			} else {
 				await requestLineAPI.put(requestLine);
 				toast.success("Success!");
-				navigate(`requests/detail/${requestId}`);
+				navigate(`/requests/detail/${requestId}`);
 			}
 		} catch (error: any) {
 			toast.error(error.message);
@@ -70,7 +69,7 @@ function RequestLineForm() {
 					<div className="d-flex row-1 gap-3 w-100">
 						<div className="d-flex flex-column w-100">
 							<label className="justify-items-end">{requestId}</label>
-							<input type="number" value={requestId}/>
+							{/* <input type="number" value={requestId}/> */}
 							<label className="align-content-center form-label" htmlFor="productID">
 								Product
 							</label>

@@ -43,22 +43,22 @@ function App() {
 			<UserContext.Provider value={{ user, setUser }}>
 					<Header />
 					<main className="d-flex">
-						<Toaster
-							toastOptions={{
-								success: {
-									iconTheme: {
-										primary: "#0d6efd",
-										secondary: "white",
-									},
+					<Toaster
+						toastOptions={{
+							success: {
+								iconTheme: {
+									primary: "#0d6efd",
+									secondary: "white",
 								},
-								style: {
-									maxWidth: 500,
-								},
-							}}
-						/>
+							},
+							style: {
+								maxWidth: 500,
+							},
+						}}
+					/>
 
 						<NavMenu />
-						<section className="p-3 w-100">
+						<div className="p-3 w-100">
 							<Routes>
 								<Route path="/" element={<Home />} />
 								<Route path="/signin" element={<SignInPage />} />
@@ -86,7 +86,7 @@ function App() {
 								<Route path="/requests/detail/:requestId/requestlines/create" element={<CreateRequestLinePage />} />
 								<Route path="/requests/detail/:requestId/edit/:requestLineId" element={<EditRequestLinePage />} />
 							</Routes>
-						</section>
+						</div>
 					</main>
 			</UserContext.Provider>
 		</BrowserRouter>
