@@ -48,15 +48,14 @@ function RequestDetailsPage() {
 
 	async function remove(requestLine: RequestLine) {
 		if (confirm("Are you sure you want to delete this line item?")) {
-		  if (requestLine.id) {
-			 await requestLineAPI.delete(requestLine.id);
-			 let updatedRequestLines = requestLine.find((r) => r.id !== requestLine.id);
-			 setRequestLines(updatedRequestLines);
-			 toast.success("Successfully deleted.");
-		  }
-
+			if (requestLine.id) {
+				await requestLineAPI.delete(requestLine.id);
+				let updatedRequestLines = requestLine.find((r) => r.id !== requestLine.id);
+				setRequestLines(updatedRequestLines);
+				toast.success("Successfully deleted.");
+			}
 		}
-	 }
+	}
 
 	async function sendReview() {
 		if (!request) return;
@@ -115,49 +114,42 @@ function RequestDetailsPage() {
 						)}
 
 						<div className="container container-fluid">
-							{/* {URL = http://localhost:5175/requests/detail/{requestID}/edit && 
-							
-							send for review & cancel buttons (in EditForm)
-							<EditRequest /> 
-							
-							)} */}
-
 							{requestId && (
-								// {userId !=== request.userId && (
+								<div className="d-flex p-2 gap-5">
+									<div className="d-flex flex-column ">
+										<div className="fw-bold ">Description</div>
+										<small className="pb-3">{request?.description}</small>
 
-								// 	approve reject edit header)}
-
-								// {userId === request.userId && (
-
-								// 	edit header)}
-
-								<div className="d-flex p-2 gap-5 justify-content-start">
-									<div className="d-flex flex-column gap-2">
-										<div>Description</div>
-										<small>{request?.description}</small>
-
-										<div>Justification</div>
-										<small>{request?.justification}</small>
-									</div>
-									<div className="d-flex flex-column gap-2">
-										<div>Delivery Method</div>
-										<small>{request?.deliveryMode}</small>
-
-										<div>Status</div>
-										<small>{request?.status}</small>
+										<div className="fw-bold ">Justification</div>
+										<small className="pb-3">{request?.justification}</small>
 									</div>
 
-									<div className="d-flex flex-column gap-2">
-										<div>Requested By</div>
+									<div className="d-flex flex-column ">
+										<div className="fw-bold ">Delivery Method</div>
+										<small className="pb-3">{request?.deliveryMode}</small>
+
+										<div className="fw-bold ">Status</div>
+										<small className="pb-3">{request?.status}</small>
+									</div>
+
+									<div className="d-flex flex-column">
+										<div className="fw-bold">Requested By</div>
 										<small>
-											<span>
-												{request?.user?.firstName}
-												{request?.user?.lastName}
+											<span className="d-flex pb-3">
+												{request?.user?.firstName} {request?.user?.lastName}
 											</span>
 										</small>
 									</div>
+
+									<div
+										className="d-flex flex-column"
+									>
+										<div className="fw-bold ">Total</div>
+										<div className="">${request?.total}</div>
+									</div>
 								</div>
 							)}
+
 							<RequestLinesTable requestLines={request?.requestlines} onRemove={remove} />
 						</div>
 					</div>
@@ -168,4 +160,3 @@ function RequestDetailsPage() {
 }
 
 export default RequestDetailsPage;
-

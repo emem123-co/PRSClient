@@ -5,6 +5,7 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import { RequestLine } from "./RequestLine";
 
 import { Link } from "react-router-dom";
+import { Product } from "../products/Product";
 
 interface RequestLinesTableProps {
 	requestLines: RequestLine[] | undefined;
@@ -26,14 +27,14 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 		<>
 			<div className="container container-fluid">
 				<hr className="pt-2" />
+				{/* <div>${requestLines?.requestID.total}</div> */}
 				<table className="table table-hover border border-3">
 					<thead className="">
 						<tr className="w-100">
 							<th className="px-4">Product</th>
-							<th className="pe-4">Price</th>
-							<th className="pe-4">Quantity</th>
-							<th className="pe-4">Line Total</th>
-							<th className="pe-4">Request Total</th>
+							<th className="pe-3">Price</th>
+							<th className="pe-3">Quantity</th>
+							<th className="pe-3">Line Total</th>
 						</tr>
 					</thead>
 
@@ -45,10 +46,10 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 							</td>
 							<td className="pe-4 pt-2">{requestLine.quantity}</td>
 							<td className="pe-4 pt-2">
-								{/* <div className="multiply">{requestLine.product?.price * requestLine.quantity}</div> */}
+							<td>${(requestLine.product.price ?? 0) * (requestLine.quantity ?? 0)}</td>
 							</td>
 							<td className="pe-4 pt-2">{requestLine.request?.total}</td>
-							{/* <td>{requestLine.total}</td> */}
+							<td>{requestLine.total}</td>
 							<td className="pe-4 pt-2">
 								<div className="ps-4 pt-2 d-flex gap-3">
 									<Link className="small" to={`/requests/detail/${requestLine.requestID}/edit/${requestLine.id}`}>
