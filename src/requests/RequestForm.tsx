@@ -103,17 +103,16 @@ function RequestForm() {
 									Status
 								</label>
 								<select
-									className={`form-select ${errors.status && "is-invalid"}`}
+									disabled className={`form-select ${errors.status && "is-invalid"}`}
 									id="status"
 									defaultValue="NEW"
-									{...register("status", { required: "Status Required" })}
+									{...register("status")}
 								>
 									<option value="NEW">NEW</option>
 									<option value="REVIEW">REVIEW</option>
 									<option value="APPROVED">APPROVED</option>
 									<option value="REJECTED">REJECTED</option>
 								</select>
-								<div className="invalid-feedback">{errors.status?.message}</div>
 							</div>
 
 							<div className="d-flex flex-column w-25 p-3 ">

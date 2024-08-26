@@ -10,9 +10,7 @@ function ProductListPage() {
 				<section className="container-fluid bg-white">
 					<div className="d-flex justify-content-between align-items-center m-0 px-1">
 						<p className="m-0 fw-normal fs-5">Product List</p>
-						<Link className="btn btn-outline-primary fw-light fs-6" to={"./create"}>
-							Dad's Button
-						</Link>
+
 						<Link className="btn btn-primary fw-light fs-6" to={"./create"}>
 							+ Product
 						</Link>

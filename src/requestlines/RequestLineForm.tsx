@@ -68,7 +68,7 @@ function RequestLineForm() {
 				<form className="d-flex flex-wrap flex-row w-75" onSubmit={handleSubmit(saveRequestLine)} noValidate>
 					<div className="d-flex row-1 gap-3 w-100">
 						<div className="d-flex flex-column w-100">
-							<label className="justify-items-end">{requestId}</label>
+							{/* <label className="justify-items-end">{requestId}</label> */}
 							{/* <input type="number" value={requestId}/> */}
 							<label className="align-content-center form-label" htmlFor="productID">
 								Product

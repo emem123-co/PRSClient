@@ -20,7 +20,7 @@ export const requestLineAPI = {
 	
 
 	delete(id: number) {
-		return fetch(`${url}/delete/${id}`, { method: "DELETE" }).then(checkStatus);
+		return fetch(`${url}/${id}`, { method: "DELETE" }).then(checkStatus);
 	},
 
 	post(requestLine: RequestLine) {

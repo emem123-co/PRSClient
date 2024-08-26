@@ -28,34 +28,26 @@ function RequestDetailsPage() {
 		}
 	}
 
-	useEffect(() => {
-		loadRequest();
-	}, []);
-
-	// const save: SubmitHandler<Request> = async (request) => {
-	// 	try {
-	// 		if (request.isNew) {
-	// 			await requestAPI.post(request);
-	// 			navigate(`/requests`);
-	// 		} else {
-	// 			await requestAPI.put(request);
-	// 			navigate(`/requests`);
-	// 		}
-	// 	} catch (error: any) {
-	// 		toast.error(error.message);
-	// 	}
-	// };
-
-	async function remove(requestLine: RequestLine) {
+	
+	
+	
+	async function removeRequestLine(requestLine: RequestLine) {
 		if (confirm("Are you sure you want to delete this line item?")) {
 			if (requestLine.id) {
 				await requestLineAPI.delete(requestLine.id);
-				let updatedRequestLines = requestLine.find((r) => r.id !== requestLine.id);
-				setRequestLines(updatedRequestLines);
 				toast.success("Successfully deleted.");
+				let updatedRequestLines = request?.requestlines?.filter((rl) => rl.id !== requestLine.id);
+				if (request) {
+					
+					setRequest({...request, requestlines: updatedRequestLines} as Request);
+				}
 			}
+			navigate(`/requests/detail/${requestId}`);
 		}
 	}
+	useEffect(() => {
+		loadRequest();
+	}, []);
 
 	async function sendReview() {
 		if (!request) return;
@@ -115,42 +107,53 @@ function RequestDetailsPage() {
 
 						<div className="container container-fluid">
 							{requestId && (
-								<div className="d-flex p-2 gap-5">
-									<div className="d-flex flex-column ">
-										<div className="fw-bold ">Description</div>
-										<small className="pb-3">{request?.description}</small>
+								<div className="d-flex ">
+									<div className="d-flex p-2 gap-5 w-100">
+										<div className="d-flex flex-column ">
+											<div className="fw-bold ">Description</div>
+											<small className="pb-3">{request?.description}</small>
 
-										<div className="fw-bold ">Justification</div>
-										<small className="pb-3">{request?.justification}</small>
+											<div className="fw-bold ">Justification</div>
+											<small className="pb-3">{request?.justification}</small>
+										</div>
+
+										<div className="d-flex flex-column ">
+											<div className="fw-bold ">Delivery Method</div>
+											<small className="pb-3">{request?.deliveryMode}</small>
+
+											<div className="fw-bold ">Status</div>
+											<small className="pb-3">{request?.status}</small>
+										</div>
 									</div>
 
-									<div className="d-flex flex-column ">
-										<div className="fw-bold ">Delivery Method</div>
-										<small className="pb-3">{request?.deliveryMode}</small>
+									<div className="d-flex justify-content-end w-100">
+										<div className="ps-5 d-flex flex-column">
+											<div
+												className="fw-bold border border-2 rounded-2 border-black text-bg-dark px-2 py-1 d-flex flex-column align-items-center justify-items-center"
+												style={{ width: "9rem" }}
+											>
+												Requested By
+												<small>
+													<span className="d-flex pb-1 ps-1 fw-normal">
+														{request?.user?.firstName} {request?.user?.lastName}
+													</span>
+												</small>
+											</div>
 
-										<div className="fw-bold ">Status</div>
-										<small className="pb-3">{request?.status}</small>
-									</div>
-
-									<div className="d-flex flex-column">
-										<div className="fw-bold">Requested By</div>
-										<small>
-											<span className="d-flex pb-3">
-												{request?.user?.firstName} {request?.user?.lastName}
-											</span>
-										</small>
-									</div>
-
-									<div
-										className="d-flex flex-column"
-									>
-										<div className="fw-bold ">Total</div>
-										<div className="">${request?.total}</div>
+											<div className="pt-2 w-100">
+												<div
+													className="fw-bold border border-2 rounded-2 border-primary px-2 py-1 d-flex flex-column align-items-center justify-content-end w-100"
+													style={{ width: "6rem" }}
+												>
+													Total<div className=" fw-normal">${request?.total}</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							)}
 
-							<RequestLinesTable requestLines={request?.requestlines} onRemove={remove} />
+							<RequestLinesTable requestLines={request?.requestlines} onRemove={removeRequestLine} />
 						</div>
 					</div>
 				</div>

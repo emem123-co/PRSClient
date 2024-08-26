@@ -8,26 +8,16 @@ import { Link } from "react-router-dom";
 import { Product } from "../products/Product";
 
 interface RequestLinesTableProps {
-	requestLines: RequestLine[] | undefined;
+	request: Request[] | undefined;
 	onRemove: (requestLines: RequestLine) => void;
 }
 
 function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
-	// async function remove(requestLine: RequestLine) {
-	// 	if (confirm("Are you sure you want to delete this requestlines?")) {
-	// 		if (requestLine.id) {
-	// 			await requestLineAPI.delete(requestLine.id);
-	// 			let updatedRequestLines = requestLines.filter((rL) => rL.id !== requestLine.id);
-	// 			setRequestLines(updatedRequestLines);
-	// 			toast.success("Successfully deleted.");
-	// 		}
-	// 	}
-	// }
+	
 	return (
 		<>
 			<div className="container container-fluid">
 				<hr className="pt-2" />
-				{/* <div>${requestLines?.requestID.total}</div> */}
 				<table className="table table-hover border border-3">
 					<thead className="">
 						<tr className="w-100">
@@ -35,6 +25,7 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 							<th className="pe-3">Price</th>
 							<th className="pe-3">Quantity</th>
 							<th className="pe-3">Line Total</th>
+							<th className="pe-3">Total</th>
 						</tr>
 					</thead>
 
@@ -45,11 +36,8 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 								{requestLine.quantity && `$${requestLine.product?.price}/${requestLine.product?.unit}`}
 							</td>
 							<td className="pe-4 pt-2">{requestLine.quantity}</td>
-							<td className="pe-4 pt-2">
-							<td>${(requestLine.product.price ?? 0) * (requestLine.quantity ?? 0)}</td>
-							</td>
+							<td className="pe-4 pt-2">${(requestLine.product.price ?? 0) * (requestLine.quantity ?? 0)}</td>
 							<td className="pe-4 pt-2">{requestLine.request?.total}</td>
-							<td>{requestLine.total}</td>
 							<td className="pe-4 pt-2">
 								<div className="ps-4 pt-2 d-flex gap-3">
 									<Link className="small" to={`/requests/detail/${requestLine.requestID}/edit/${requestLine.id}`}>
@@ -66,6 +54,7 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
 									</a>
 								</div>
 							</td>
+							{/* <td>${requestLine.request.total}</td> */}
 						</tbody>
 					))}
 				</table>
