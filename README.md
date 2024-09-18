@@ -1,4 +1,4 @@
-#Purchase Request System
+# Purchase Request System
 This application is a mock purchase request system that allows users to login, submit a request to purchase items needed.
 
 - Each user is either a system admin, approver, or both or neither. Permissions alter depending. 
