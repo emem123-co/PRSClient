@@ -1,3 +1,18 @@
+#Purchase Request System
+This application is a mock purchase request system that allows users to login, submit a request to purchase items needed.
+
+- Each user is either a system admin, approver, or both or neither. Permissions alter depending. 
+- There are pages to view requests, request details, available products, vendors for the products and users in the system. 
+- Each of the items in the above cateogries can be edited and user can enter a new entry on each page.
+- Save, submit, cancel buttons function and actively update the database via api calls.
+
+Limitations:
+- Some functionality is not available on the request details page. Some conditional visibility of buttons on the request details page not yet implemented.
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
